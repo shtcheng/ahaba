@@ -1,9 +1,7 @@
 {
   "pages":[
-    "pages/check/check",
     "pages/index/index",
     "pages/logs/logs",
-    "pages/protocol/protocol",
     "pages/user/user"
   ],
   "window":{
