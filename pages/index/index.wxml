@@ -1,6 +1,7 @@
 <!--index.wxml-->
 <view class="container">
-  <view class="bindPhone">
+  <!--注册-->
+  <view wx:if="{{showBind}}">
     <view class="section">
       <input placeholder="请输入手机号码" auto-focus/>
       <button bindtap="getCode">获取验证码</button>    
@@ -9,5 +10,16 @@
       <input placeholder="验证码" auto-focus/>
       <button bindtap="checkPhone">验证</button>
     </view>
+  </view>
+
+  <!--注册协议-->
+  <view wx:if="{{showProto}}">
+    <text>注册协议</text>
+    <button bindtap="confirmProto">接受</button>
+  </view>
+
+  <!--首页-->
+  <view wx:if="{{showIndex}}">
+    <text>首页</text>
   </view>
 </view>    
