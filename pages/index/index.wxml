@@ -16,7 +16,7 @@
 
   <!--注册协议-->
   <view wx:if="{{showProto}}">
-    <text>注册协议</text>
+    <text>{{userAgreement}}</text>
     <button bindtap="confirmProto">接受</button>
   </view>
 

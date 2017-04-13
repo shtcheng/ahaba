@@ -26,7 +26,11 @@ Page({
     second:0,
 
     phone: "",
-    checkcode:0
+    checkcode:0,
+
+    page:0,
+    pnum:10,
+    ticket:null
   },
 
   //获取电话号码
@@ -45,13 +49,27 @@ Page({
    //获取验证码
   getCode: function() {    
     this.setData({disabledGetCode:true})
-    //TODO获取验证码
 
-    this.setData({disabledInputCode:false})    
+    //获取验证码
+    wx.request({
+        url: app.globalData.rootUrl + "/getCVC?phone="+this.data.phone,
+        data: {},
+        method: 'GET',
+        success: function(res){
+          if (res.status != 0) {
+            console.log(res)
+            this.setData({disabledGetCode:false})
+            alert(res.msg)
+            return
+          }
+          
+          this.setData({disabledInputCode:false})    
 
-    //倒计时
-    this.data.second = this.data.timeOut
-    countdown(this)
+          //倒计时
+          this.data.second = this.data.timeOut
+          countdown(this)
+        } 
+     });     
   },
 
   //验证码
@@ -64,11 +82,49 @@ Page({
   },
 
   //提交
-  submit: function(){
-    //TODO
+  submit: function(){    
     if (this.data.checkcode == 0 || this.data.phone.length == 0){
       return
     }
+
+    //绑定手机
+    wx.request({
+        url: app.globalData.rootUrl + "/bindPhone?phone="+this.data.phone+"&cvc="+this.data.checkcode + 
+          "&openid="+app.globalData.openid,
+        data: {},
+        method: 'GET',
+        success: function(res){
+          if (res.status != 0) {
+            console.log(res)
+            alert(res.msg)
+            return
+          }
+
+          this.setData({showBind:false})
+          this.setData({showProto:true})
+          this.setData({showIndex:false})
+
+          //加载用户协议
+          wx.request({
+              url: app.globalData.rootUrl + "/getAgreement",
+              data: {},
+              method: 'GET',
+              success: function(res){
+                if (res.status != 0) {
+                  console.log(res)
+                  alert(res.msg)
+                  return
+                }
+
+                this.setData({userAgreement: res.msg})
+              } 
+          });
+        } 
+     });
+  },
+
+  loadTicket : function(){
+    console.log("loadTicket")
   },
 
   //接受协议
@@ -76,16 +132,65 @@ Page({
     this.setData({showBind:false})
     this.setData({showProto:false})
     this.setData({showIndex:true})
+    this.loadTicket()
   },
 
+  //初始化
   onLoad: function () {
-    this.setData({disabledGetCode:true})
-    this.setData({disabledInputCode : true})
-    this.setData({codeButtText:"获取"}) 
-    //从服务器拉去数据
-    
-    this.setData({showBind:true})
-    this.setData({showProto:false})
-    this.setData({showIndex:false})    
+    wx.login({
+      success: function(res){            
+        if(res.code) {  
+             wx.getUserInfo({
+                success: function (res) {
+                   app.globalData.userInfo = res.userInfo;
+                   console.log(app.globalData.userInfo)
+                } 
+            });  
+
+            var d = app.globalData;
+            var strUrl = 'https://api.weixin.qq.com/sns/jscode2session?appid='+d.appid+'&secret='+d.secret+'&js_code='+res.code+'&  grant_type=authorization_code';    
+            wx.request({
+                url: strUrl,
+                data: {},
+                method: 'GET',
+                success: function(res){
+                    app.globalData.openid = res.data.openid;
+                    console.log(app.globalData.openid)
+
+                    //是否绑定手机
+                    wx.request({
+                      url: app.globalData.rootUrl + "/checkBind?openid="+app.globalData.openid,
+                      data: {},
+                      method: 'GET',
+                      success: function(res){
+                      if (res.status != 0) {
+                          console.log(res)
+                          alert(res.msg)
+                          return
+                        }
+
+                        if (0 == res.msg){
+                          this.setData({disabledGetCode:true})
+                          this.setData({disabledInputCode : true})
+                          this.setData({codeButtText:"获取"})  
+
+                          this.setData({showBind:true})
+                          this.setData({showProto:false})
+                          this.setData({showIndex:false})    
+                        }else{
+                          this.setData({showBind:false})
+                          this.setData({showProto:false})
+                          this.setData({showIndex:true})
+                          this.loadTicket()
+                        }
+                      } 
+                  });
+              } 
+            });  
+          }else {
+              console.log('获取用户登录态失败！' + res.errMsg)  
+          }          
+      }
+    });
   }
 })
