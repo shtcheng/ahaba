@@ -1,34 +1,39 @@
 //app.js
 App({
-  onLaunch: function () {
-    //调用API从本地缓存中获取数据
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
-  },
-  getUserInfo:function(cb){
+  onLaunch: function () {    
     var that = this
-    if(this.globalData.userInfo){
-      typeof cb == "function" && cb(this.globalData.userInfo)
-    }else{
-      //调用登录接口
-      wx.login({
-        success: function () {
-          wx.getUserInfo({
-            success: function (res) {
-              that.globalData.userInfo = res.userInfo
-              typeof cb == "function" && cb(that.globalData.userInfo)
-            }
-          })
-        }
-      })
-    }
+    wx.login({
+      success: function(res){            
+        if(res.code) {  
+             wx.getUserInfo({
+                success: function (res) {
+                   that.globalData.userInfo = res.userInfo;
+                   console.log(that.globalData.userInfo)
+                } 
+            });  
+
+            var d = that.globalData;
+            var strUrl = 'https://api.weixin.qq.com/sns/jscode2session?appid='+d.appid+'&secret='+d.secret+'&js_code='+res.code+'&grant_type=authorization_code';    
+            wx.request({
+                url: strUrl,
+                data: {},
+                method: 'GET',
+                success: function(res){
+                    that.globalData.openid = res.data.openid;
+                    console.log(that.globalData.openid)
+              } 
+            });  
+          }else {  
+              console.log('获取用户登录态失败！' + res.errMsg)  
+          }          
+      }
+    });   
   },
+
   globalData:{
+    appid:"wxb1e9f107aff08a66",
+    secret:"0ccd7143b59b99ae3fa50aecab312763",
     userInfo:null,
-    phonenumber:null,
-    mytickets:null,
-    my_money:"0.0",
-    data_end:null
+    openid:null
   }
 })

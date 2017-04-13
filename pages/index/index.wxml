@@ -2,12 +2,15 @@
 <view class="container">
   <!--注册-->
   <view wx:if="{{showBind}}">
-    <view style="flex-direction:row;">
-      <input bindinput="getPhone" val placeholder="请输入手机号码" auto-focus />
-      <button disabled="{{disabledGetCode}}" bindtap="getCode">{{codeButtText}}</button>    
+    <view>
+      <input bindinput="getPhone" val placeholder="输入手机号" auto-focus />          
     </view>
     <view>
-      <input bindinput="checkCode" placeholder="验证码"/>
+      <input disabled="{{disabledInputCode}}" bindinput="inputCode" placeholder="验证码"/>
+      <button disabled="{{disabledGetCode}}" bindtap="getCode">{{codeButtText}}</button>
+    </view>
+    <view>
+      <button bindtap="submit">提交</button>
     </view>
   </view>
 
