@@ -1,4 +1,20 @@
-<!--index.wxml-->
-<view class="container">
-  <text>个人中心</text>
-</view>    
+
+<!--account.wxml-->
+<view class="page-section">
+  <view bindtap="bindViewTap" class="userinfo">
+    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+    <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    <text class="userinfo-phonenumber">{{userInfo.city}} {{userInfo.province}},{{userInfo.country}}</text>
+  </view>
+
+  <view class="usermotto">
+    <text class="user-motto">{{motto}}</text>
+  </view>
+
+    <view class="section">
+      <label > 我的余额：</label> <label class="yue"> 0.00 元</label>
+      <button bindtap="chargeTap">充值</button>    
+    </view>
+
+</view>
+

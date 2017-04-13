@@ -25,6 +25,10 @@ App({
     }
   },
   globalData:{
-    userInfo:null
+    userInfo:null,
+    phonenumber:null,
+    mytickets:null,
+    my_money:"0.0",
+    data_end:null
   }
 })
