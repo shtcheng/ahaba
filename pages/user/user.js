@@ -1,20 +1,35 @@
 //user.js
 //获取应用实例
 var app = getApp()
-
-var showBind = false;//控制是否显示绑定页面
-
 Page({
-  //获取验证码
-  getCode: function() {
-    console.log("getCode")
+  data: {
+    //motto: '你好，小程序！',
+    userInfo: {}
   },
-  //验证
-  checkPhone: function() {
-    console.log("checkPhone")
+  //事件处理函数
+  bindViewTap: function() {
+    wx.navigateTo({
+      url: '../logs/logs'
+    })
   },
+
+  //充值按钮事件处理
+  chargeTap:function() {
+    wx.navigateTo({
+      url: '../charge/charge'
+    })
+  },
+
 
   onLoad: function () {
-    console.log('onLoad')    
+    console.log('onLoad')
+    var that = this
+    //调用应用实例的方法获取全局数据
+    app.getUserInfo(function(userInfo){
+      //更新数据
+      that.setData({
+        userInfo:userInfo
+      })
+    })
   }
 })
