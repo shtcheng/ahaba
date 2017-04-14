@@ -30,47 +30,53 @@ Page({
 
     page:0,
     pnum:10,
-    hasMore:true,
+    hasMore:false,
     ticket:[]
   },
 
+  //倒计时
+  countdown :function(){
+
+  },
   //获取电话号码
   getPhone : function(e){
+    var that = this  
     var phone = /^0?1[3|4|5|8][0-9]\d{8}$/; 
     if(!phone.test(e.detail.value)) { 
-        this.setData({
+        that.setData({
           disabledGetCode:true,
           disabledInputCode:true
         })
         return;
     } 
     //号码格式正确，获取验证码按钮可用
-    this.setData({disabledGetCode:false})    
-    this.data.phone = e.detail.value
+    that.setData({disabledGetCode:false})    
+    that.data.phone = e.detail.value
   },
 
    //获取验证码
-  getCode: function() {    
-    this.setData({disabledGetCode:true})
+  getCode: function() {
+    var that = this  
+    that.setData({disabledGetCode:true})
 
     //获取验证码
     wx.request({
-        url: app.globalData.rootUrl + "/getCVC?phone="+this.data.phone,
+        url: app.globalData.rootUrl + "/getCVC?phone="+that.data.phone,
         data: {},
         method: 'GET',
         success: function(res){
           if (res.status != 0) {
             console.log(res)
-            this.setData({disabledGetCode:false})
+            that.setData({disabledGetCode:false})
             alert(res.msg)
             return
           }
           
-          this.setData({disabledInputCode:false})    
+          that.setData({disabledInputCode:false})    
 
           //倒计时
-          this.data.second = this.data.timeOut
-          countdown(this)
+          that.data.second = that.data.timeOut
+          countdown(that)
         } 
      });     
   },
@@ -80,19 +86,21 @@ Page({
     if (isNaN(e.detail.value)){
        return
     }
-      
-    this.data.checkcode = parseInt(e.detail.value)
+    
+    var that = this  
+    that.data.checkcode = parseInt(e.detail.value)
   },
 
   //提交
-  submit: function(){    
-    if (this.data.checkcode == 0 || this.data.phone.length == 0){
+  submit: function(){
+    var that = this  
+    if (that.data.checkcode == 0 || that.data.phone.length == 0){
       return
     }
 
     //绑定手机
     wx.request({
-        url: app.globalData.rootUrl + "/bindPhone?phone="+this.data.phone+"&cvc="+this.data.checkcode + 
+        url: app.globalData.rootUrl + "/bindPhone?phone="+that.data.phone+"&cvc="+that.data.checkcode + 
           "&openid="+app.globalData.openid,
         data: {},
         method: 'GET',
@@ -103,7 +111,7 @@ Page({
             return
           }
 
-          this.setData({
+          that.setData({
             showBind:false,
             showProto:true,
             showIndex:false
@@ -121,26 +129,25 @@ Page({
                   return
                 }
 
-                this.setData({userAgreement: res.msg})
+                that.setData({userAgreement: res.msg})
               } 
           });
         } 
      });
   },
 
-  loadTicket : function(){
-    console.log("loadTicket")
+  hiddenAll: function(){
+    var that = this
+    that.setData({
+        hidden: true
+    })
   },
-  //加载更多
-  loadMore: function(e) {
-      this.setData({
-        hasRefesh:true
-      });
-      if (!this.data.hasMore) 
-        return
 
-      wx.request({
-          url: app.globalData.rootUrl + '/getTicket?page='+(this.data.page++)+'&pnum='+this.data.pnum,
+  //加载商品
+  loadTicket : function(){
+    var that = this
+    wx.request({
+          url: app.globalData.rootUrl + '/getTicket?page='+(that.data.page++)+'&pnum='+that.data.pnum,
           data: {},
           method: 'GET',
           success: function(res){
@@ -149,58 +156,80 @@ Page({
               alert(res.msg)
               return
             }
-
-            this.setData({
-              ticket : this.ticket.concat(res.msg),
-              hidden: true,
-              hasRefesh: false
-            });
-          } 
+            if (res.msg.length == 0){
+              that.data.hasMore = false
+            }else{
+              that.data.hasMore = true
+              that.setData({
+                ticket : that.ticket.concat(res.msg),
+              });
+            }
+          },
+          fail: function() {
+            that.data.page--            
+          },
+          complete: function() {
+            that.hiddenAll()
+          }
       });
+  },
+  //加载更多
+  loadMore: function(e) {
+      var that = this
+      if (!that.data.hasMore) 
+        return
+      //动画显示      
+      that.setData({
+        hidden:false
+      });      
+
+      that.loadTicket()
   },
   //刷新处理
   refesh: function(e) {
-  var that = this;
-  that.setData({
-      hasRefesh:true,
-  });
-      var url = 'http://v.juhe.cn/weixin/query?key=f16af393a63364b729fd81ed9fdd4b7d&pno=1&ps=10';
-      network_util._get(url,
-      function(res){
+      var that = this
+      //数据重置
+      that.data.page = 0
+      that.data.ticket = []
+      //动画显示
       that.setData({
-        list:res.data.result.list,
-        hidden: true,
-        page:1,
-        hasRefesh:false,
+          hidden:false
       });
-      },function(res){
-      console.log(res);
-  })
+      
+      that.loadTicket()
   },
   //接受协议
   confirmProto : function(){
-    this.setData({
+    var that = this
+    that.setData({
       showBind:false,
       showProto:false,
       showIndex:true
       })
-    this.loadTicket()
+    that.loadTicket()
   },
 
   //初始化
   onLoad: function () {
-    this.setData({
-      hidden : true,
-      hasMore : false
+    var that = this
+    //动画显示
+    that.setData({
+      hidden : false
     })
     wx.login({
+      fail: function() {
+        that.hiddenAll()           
+      },
       success: function(res){            
         if(res.code) {  
              wx.getUserInfo({
                 success: function (res) {
                    app.globalData.userInfo = res.userInfo;
                    console.log(app.globalData.userInfo)
-                } 
+                },
+                fail: function() {
+                  that.hiddenAll()
+                }
             });  
 
             var d = app.globalData;
@@ -209,6 +238,9 @@ Page({
                 url: strUrl,
                 data: {},
                 method: 'GET',
+                fail: function() {
+                  that.hiddenAll()           
+                },
                 success: function(res){
                     app.globalData.openid = res.data.openid;
                     console.log(app.globalData.openid)
@@ -218,15 +250,12 @@ Page({
                       url: app.globalData.rootUrl + "/checkBind?openid="+app.globalData.openid,
                       data: {},
                       method: 'GET',
+                      fail: function() {
+                        that.hiddenAll()           
+                      },
                       success: function(res){
-                      if (res.status != 0) {
-                          console.log(res)
-                          alert(res.msg)
-                          return
-                        }
-
                         if (0 == res.msg){
-                          this.setData({
+                          that.setData({
                             disabledGetCode:true,
                             disabledInputCode : true,
                             codeButtText:"获取",
@@ -235,20 +264,20 @@ Page({
                             showIndex:false
                             })                          
                         }else{
-                          this.setData({
+                          that.setData({
                               showBind:false,
                               showProto:false,
                               showIndex:true                              
-                            })
-
-                          this.loadTicket()
+                          })
+                          that.loadTicket()
                         }
                       } 
                   });
               } 
             });  
           }else {
-              console.log('获取用户登录态失败！' + res.errMsg)  
+              console.log('获取用户登录态失败！' + res.errMsg)             
+              that.hiddenAll()           
           }          
       }
     });
