@@ -1,22 +1,25 @@
 <!--index.wxml-->
 <loading hidden="{{hidden}}" >
     加载中...
-</loading> 
-
-<scroll-view scroll-y="true" style="height: 100%; width:100%;" bindscrolltolower="loadMore" bindscrolltoupper="refesh"> 
-    <view hidden="{{hiddenIndex}}" style="text-align:center"> 
-      <view wx:for="{{ticketList}}" wx:for-item="ticket" wx:key="id" style="margin:5px; width:90%">
-        <view style="display: flex; background:{{ticket.color}}">
-          <view style="margin:10px">
-            <view style="font-size:18pt;font-weight:bold">{{ticket.name}}</view>        
-            <view style="font-size:12pt;color:#999">{{ticket.addr}}</view>
-          </view>
-          <view style="display: flex;margin:22px">
-            <view>{{ticket.type}}: ￥</view>
-            <view>{{ticket.money}}</view>
-            <image src="../../image/icon_plus_alt2.png" style="width:20px; height:20px"></image>
-          </view>
-        </view>
+</loading>
+<view hidden="{{hiddenIndex}}" style="text-align:center"> 
+  <view wx:for="{{ticketList}}" wx:for-item="ticket" wx:key="id" style="margin:5px; width:90%">
+    <view style="display: flex; background:{{ticket.color}}">
+      <view style="margin:10px">
+        <view style="font-size:18pt;font-weight:bold">{{ticket.name}}</view>        
+        <view style="font-size:12pt;color:#999">{{ticket.addr}}</view>
+      </view>
+      <view style="display: flex;margin:22px">
+        <view>{{ticket.type}}: ￥</view>
+        <view>{{ticket.money}}</view>
+        <image src="../../image/icon_plus_alt2.png" style="width:20px; height:20px"></image>
       </view>
     </view>
-</scroll-view>
+  </view>
+
+  <view style="height:50px">
+  </view>
+  <view style="position:fixed; bottom:0rpx; display: flex;padding-bottom: 2px; width:100%">  
+    <button style="float:left;">结算</button>
+  </view>
+</view>

@@ -8,7 +8,7 @@ Page({
 
     loadingTicket: false,
 
-    hasMore:false,
+    hasMore:true,
     tickets:[]
   },
 
@@ -65,27 +65,21 @@ Page({
       });
   },
   //加载更多
-  loadMore: function(e) {
+  onReachBottom: function() {
+      console.log("1111111111111111111")
       var that = this
       if (!that.data.hasMore) 
         return
-      //动画显示      
-      that.setData({
-        hidden:false
-      });      
-
       that.loadTicket()
   },
   //刷新处理
-  refesh: function(e) {
+  onPullDownRefresh: function(e) {
+      console.log("22222222222222222222222222222")
       var that = this
       //数据重置
       that.data.page = 0
       that.data.ticket = []
-      //动画显示
-      that.setData({
-          hidden:false
-      });
+      that.data.hasMore = true
       
       that.loadTicket()
   },
