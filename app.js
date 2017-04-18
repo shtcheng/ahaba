@@ -9,6 +9,7 @@ App({
     rootUrl:"http://localhost",//服务器url
     userInfo:null,//用户微信信息
     openid:null,//微信openid
+    phone:null,//手机号
     register:false,//是否注册
   }
 })

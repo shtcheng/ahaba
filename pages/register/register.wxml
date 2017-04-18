@@ -2,26 +2,26 @@
 <!--account.wxml-->
 <!--注册-->
 <view class="container" >
-  <label>
+  <view>
     <input bindinput="getPhone" val placeholder="输入手机号" auto-focus />          
-  </label>
+  </view>
 
-  <label style="display: flex;margin:10px">
+  <view style="display: flex;margin:10px">
     <input bindinput="inputCode" style="width:130px" placeholder="验证码"/>
     <button disabled="{{disabledGetCode}}" style="height:30px;font-size:10pt" bindtap="getCode">{{codeButtText}}</button>
-  </label>
+  </view>
   
-  <label style="margin:5px">
+  <view style="margin:5px">
     <checkbox-group bindchange="listenCheckboxChange">
-      <label style="display: flex;">
+      <view style="display: flex;">
         <checkbox/>
         <navigator url="../proto/proto" style="color:blue">用户协议</navigator>
-      </label>
+      </view>
     </checkbox-group>
 
-    <label>
-      <button style="margin:15px" disabled="{{disabledSubmit}}" bindtap="submit">注册</button>
-    </label>
-  </label>
+    <view>
+      <button style="margin:15px;" disabled="{{disabledSubmit}}" bindtap="submit">注册</button>
+    </view>
+  </view>
 </view>
 

@@ -4,12 +4,12 @@ var app = getApp();
 Page({
    data: {
     page:0,
-    pnum:10,
+    pnum:15,
 
     loadingTicket: false,
 
     hasMore:false,
-    ticket:[]
+    tickets:[]
   },
 
   hiddenAll: function(){
@@ -19,12 +19,22 @@ Page({
     })
   },
 
+  setColor : function(tickets){
+    for(var i = 0; i < tickets.length; i++){
+      if (i % 2 == 0){
+        tickets[i].color = "rgb(153, 204, 204)"
+      }else{
+        tickets[i].color = "rgb(255, 204, 102)"
+      }
+    }
+  },
+
   //加载商品
   loadTicket : function(){
     var that = this
     if (that.data.loadingTicket){
       return
-    }
+    }    
 
     wx.request({
           url: app.globalData.rootUrl + '/getTicket?page='+(that.data.page++)+'&pnum='+that.data.pnum,
@@ -39,8 +49,9 @@ Page({
               that.data.hasMore = false
             }else{
               that.data.hasMore = true
-              that.setData({
-                ticket : that.ticket.concat(res.msg),
+              that.setColor(res.msg)
+              that.setData({                
+                ticketList : that.tickets.concat(res.msg),
               });
             }
           },
@@ -128,6 +139,30 @@ Page({
                     app.globalData.openid = res.data.openid;
                     console.log(app.globalData.openid)
 
+                    //测试数据
+                    that.setData({
+                        hiddenIndex:false
+                    });
+                    for(var i = 0; i < 20; i++){
+                      var tmp = {}
+                      tmp.id = i + 1
+                      tmp.name = "水上世界"
+                      tmp.addr = "泸州游乐园"
+                      if (i %2 == 0){
+                        tmp.type = "成人票"
+                      }else{
+                        tmp.type = "儿童票"
+                      }
+                      
+                      tmp.money = 80
+                      that.data.tickets.push(tmp) 
+                    }
+                    that.setColor(that.data.tickets)
+                    that.setData({
+                      ticketList:that.data.tickets
+                    });
+                    console.log(that.data.tickets)
+
                     //是否绑定手机
                     wx.request({
                       url: app.globalData.rootUrl + "/checkBind?openid="+app.globalData.openid,
@@ -146,6 +181,7 @@ Page({
                             success: function(res){}
                           })
                         }else{
+                          //app.globalData.phone = that.data.phone
                           app.globalData.register = true
                           that.setData({
                             hiddenIndex:false

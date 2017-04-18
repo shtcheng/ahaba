@@ -103,6 +103,7 @@ Page({
           }
 
           app.globalData.register = true
+          app.globalData.phone = that.data.phone
           //返回首页
           wx.navigateTo({
             url: 'pages/index/index',
