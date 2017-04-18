@@ -2,7 +2,8 @@
   "pages":[
     "pages/index/index",
     "pages/user/user",
-    "pages/charge/charge",    
+    "pages/charge/charge",
+    "pages/pay/pay", 
     "pages/logs/logs"
   ],
   "window":{

@@ -34,10 +34,6 @@ Page({
     ticket:[]
   },
 
-  //倒计时
-  countdown :function(){
-
-  },
   //获取电话号码
   getPhone : function(e){
     var that = this  
@@ -98,12 +94,19 @@ Page({
       return
     }
 
+    //动画显示      
+    that.setData({
+      hidden:false
+    }); 
     //绑定手机
     wx.request({
         url: app.globalData.rootUrl + "/bindPhone?phone="+that.data.phone+"&cvc="+that.data.checkcode + 
           "&openid="+app.globalData.openid,
         data: {},
         method: 'GET',
+        fail: function() {
+          that.hiddenAll()
+        },
         success: function(res){
           if (res.status != 0) {
             console.log(res)
@@ -122,6 +125,9 @@ Page({
               url: app.globalData.rootUrl + "/getAgreement",
               data: {},
               method: 'GET',
+              fail: function() {
+                that.hiddenAll()
+              },
               success: function(res){
                 if (res.status != 0) {
                   console.log(res)
@@ -130,6 +136,7 @@ Page({
                 }
 
                 that.setData({userAgreement: res.msg})
+                that.hiddenAll()
               } 
           });
         } 
