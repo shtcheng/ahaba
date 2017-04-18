@@ -4,30 +4,9 @@
 </loading> 
 
 <scroll-view scroll-y="true" style="height: 100%;" bindscrolltolower="loadMore" bindscrolltoupper="refesh"> 
-    <view class="container">
-      <!--注册-->
-      <view wx:if="{{showBind}}">
-        <view>
-          <input bindinput="getPhone" val placeholder="输入手机号" auto-focus />          
-        </view>
-        <view>
-          <input disabled="{{disabledInputCode}}" bindinput="inputCode" placeholder="验证码"/>
-          <button disabled="{{disabledGetCode}}" bindtap="getCode">{{codeButtText}}</button>
-        </view>
-        <view>
-          <button bindtap="submit">提交</button>
-        </view>
-      </view>
-
-      <!--注册协议-->
-      <view wx:if="{{showProto}}">
-        <text>{{userAgreement}}</text>
-        <button bindtap="confirmProto">接受</button>
-      </view>
-
-      <!--首页-->
-      <view wx:if="{{showIndex}}">
-        <view wx:for="{{}}"></view>>
-      </view>
+    <view class="container" hidden="{{hiddenIndex}}"> 
+      <label wx:for="{{}}">
+        
+      </label>
     </view>
 </scroll-view>

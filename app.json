@@ -1,9 +1,11 @@
 {
-  "pages":[
+  "pages":[    
     "pages/index/index",
     "pages/user/user",
     "pages/charge/charge",
     "pages/pay/pay", 
+    "pages/proto/proto",
+    "pages/register/register",      
     "pages/logs/logs"
   ],
   "window":{
