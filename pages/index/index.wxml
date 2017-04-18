@@ -20,6 +20,6 @@
   <view style="height:50px">
   </view>
   <view style="position:fixed; bottom:0rpx; display: flex;padding-bottom: 2px; width:100%">  
-    <button style="float:left;">结算</button>
+    <button bindtap="goToPay" style="float:left;">结算</button>
   </view>
 </view>
