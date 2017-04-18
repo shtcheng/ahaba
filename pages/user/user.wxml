@@ -3,18 +3,73 @@
 <view class="page-section">
   <view bindtap="bindViewTap" class="userinfo">
     <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-    <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    <text class="userinfo-phonenumber">{{userInfo.city}} {{userInfo.province}},{{userInfo.country}}</text>
+  <view class="usermotto2"></view>
+    <text class="userinfo-phonenumber">{{phoneNumber}} </text>
   </view>
 
   <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
+    <text class="user-motto"></text>
   </view>
 
-    <view class="section">
-      <label > 我的余额：</label> <label class="yue"> 0.00 元</label>
+    <view class="chargeinfo">
+      <label >我的余额：</label><label class="yue"> 0.00 元</label>
       <button bindtap="chargeTap">充值</button>    
     </view>
+</view>
+
+
+  <view class="usermotto">
+    <text class="user-motto"></text>
+  </view>
+
+ <view>
+
+<view class="section__title">我买过的票：</view>
+  <scroll-view scroll-y="true" style="height: 300px;" 
+  bindscrolltoupper="upper" bindscrolltolower="lower" 
+  bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+    <view id="green" class="scroll-view-item bc_green">1111</view>
+    <view id="red"  class="scroll-view-item bc_red">2222</view>
+    <view id="yellow" class="scroll-view-item bc_yellow">3333</view>
+    <view id="blue" class="scroll-view-item bc_blue">4444</view>
+    <view id="green" class="scroll-view-item bc_green">1111</view>
+    <view id="red"  class="scroll-view-item bc_red">2222</view>
+    <view id="yellow" class="scroll-view-item bc_yellow">3333</view>
+    <view id="blue" class="scroll-view-item bc_blue">4444</view>
+    <view id="green" class="scroll-view-item bc_green">1111</view>
+    <view id="red"  class="scroll-view-item bc_red">2222</view>
+    <view id="yellow" class="scroll-view-item bc_yellow">3333</view>
+    <view id="blue" class="scroll-view-item bc_blue">4444</view>
+    <view id="green" class="scroll-view-item bc_green">1111</view>
+    <view id="red"  class="scroll-view-item bc_red">2222</view>
+    <view id="yellow" class="scroll-view-item bc_yellow">3333</view>
+    <view id="blue" class="scroll-view-item bc_blue">4444</view>
+    <view id="green" class="scroll-view-item bc_green">1111</view>
+    <view id="red"  class="scroll-view-item bc_red">2222</view>
+    <view id="yellow" class="scroll-view-item bc_yellow">3333</view>
+    <view id="blue" class="scroll-view-item bc_blue">4444</view>
+    <view id="green" class="scroll-view-item bc_green">1111</view>
+    <view id="red"  class="scroll-view-item bc_red">2222</view>
+    <view id="yellow" class="scroll-view-item bc_yellow">3333</view>
+    <view id="blue" class="scroll-view-item bc_blue">4444</view>
+    <view id="green" class="scroll-view-item bc_green">1111</view>
+    <view id="red"  class="scroll-view-item bc_red">2222</view>
+    <view id="yellow" class="scroll-view-item bc_yellow">3333</view>
+    <view id="blue" class="scroll-view-item bc_blue">4444</view>
+    <view id="green" class="scroll-view-item bc_green">1111</view>
+    <view id="red"  class="scroll-view-item bc_red">2222</view>
+    <view id="yellow" class="scroll-view-item bc_yellow">3333</view>
+    <view id="blue" class="scroll-view-item bc_blue">4444</view>
+  </scroll-view>
+
+
+<view class="btn-area">
+    <button size="mini" bindtap="tap">click me to scroll into view </button>
+    <button size="mini" bindtap="tapMove">click me to scroll</button>
+  </view>
+
+
+
 
 </view>
 

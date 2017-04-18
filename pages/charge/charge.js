@@ -20,15 +20,24 @@ Page({
 
   //充值按钮事件处理
   btnMinusMoney: function () {
+    temp_money=chargeMoney.value-100;
+    if(temp_money < 0 ) {
+      temp_money = 0;
+    }
+//    chargeMoney = temp_money;
+    this.setData({
+      "chargeMoney":temp_money
+    })
     wx.navigateTo({
       url: '../logs/logs'
     })
   },
   //充值按钮事件处理
   btnAddMoney: function () {
-    temp_money=chargeMoney.value+100
+    temp_money=chargeMoney.value+100;
+//    chargeMoney = temp_money;
     this.setData({
-      chargeMoney:temp_money
+      "chargeMoney":temp_money
     })
   },
 

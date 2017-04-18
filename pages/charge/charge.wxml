@@ -1,8 +1,10 @@
 
 <!--account.wxml-->
-<view class="container">
-    <view class="page-section">
+<view class="content">
+    <view class="layout-top">
       <view > 当前余额：{{currentMoney}} 元</view>
+    </view>
+    <view class="flex">
       <button bindtap="btnMinusMoney">-</button>
       <view >{{chargeMoney}}</view>
       <button bindtap="btnAddMoney">+</button>    

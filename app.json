@@ -1,11 +1,12 @@
 {
   "pages":[    
-    "pages/index/index",
     "pages/user/user",
+    "pages/register/register",
+    "pages/index/index",
+    "pages/verify/verify",
     "pages/charge/charge",
     "pages/pay/pay", 
     "pages/proto/proto",
-    "pages/register/register",
     "pages/logs/logs"
   ],
   "window":{
@@ -22,13 +23,18 @@
     "backgroundColor": "#ffffff",
     "list": [{
       "pagePath": "pages/index/index",
-      "iconPath" : "../../image/index.png",
-      "selectedIconPath" : "../../image/index_select.png",
-      "text": "首页"
+      "iconPath" : "image/index.png",
+      "selectedIconPath" : "image/index_select.png",
+      "text": "门票"
+    },{
+      "pagePath": "pages/verify/verify",
+      "iconPath" : "image/index.png",
+      "selectedIconPath" : "image/index_select.png",
+      "text": "检票"
     }, {
       "pagePath": "pages/user/user",
-      "iconPath" : "../../image/user.png",
-      "selectedIconPath" : "../../image/user_select.png",
+      "iconPath" : "image/user.png",
+      "selectedIconPath" : "image/user_select.png",
       "text": "我的"
     }]
   }

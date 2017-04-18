@@ -12,15 +12,28 @@
   border-radius: 50%;
 }
 
-.userinfo-nickname {
-  color: #aaa;
-}
-
 .userinfo-phonenumber {
-  color: #aaa;
+  color: #000000;
 }
 
 .usermotto {
-  margin-top: 200px;
+  margin-top: 50px;
+}
+
+.usermotto2 {
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.chargeinfo {
+  display: flex;
+  flex-direction: row;
+  align-items: left;    
+}
+
+.ticketsinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: left;  
 }
 

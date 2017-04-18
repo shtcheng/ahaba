@@ -4,7 +4,8 @@ var app = getApp()
 Page({
   data: {
     //motto: '你好，小程序！',
-    userInfo: {}
+    userInfo: {},
+    phoneNumber:13730842688
   },
   //事件处理函数
   bindViewTap: function() {
