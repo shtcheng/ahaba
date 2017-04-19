@@ -135,7 +135,7 @@ Page({
     that.setData({
       disabledGetCode:true,
       disabledSubmit : that.data.checkBox,
-      codeButtText:"获取"
+      codeButtText:"获取验证码"
     })  
   }
 })

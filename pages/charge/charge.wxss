@@ -1,26 +1,14 @@
 /**account.wxss**/
 .userinfo {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
 }
 
-.userinfo-avatar {
-  width: 256rpx;
-  height: 256rpx;
-  margin: 10rpx;
-  border-radius: 50%;
+.motto50px {
+  margin-top: 100px;
 }
 
-.userinfo-nickname {
-  color: #aaa;
+motto10px {
+  margin-top: 10px;
 }
-
-.userinfo-phonenumber {
-  color: #aaa;
-}
-
-.usermotto {
-  margin-top: 200px;
-}
-

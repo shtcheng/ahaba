@@ -4,7 +4,8 @@
     <view class="layout-top">
       <view > 当前余额：{{currentMoney}} 元</view>
     </view>
-    <view class="flex">
+    <view class="userinfo">
+      <view class="motto50px"></view>
       <button bindtap="btnMinusMoney">-</button>
       <view >{{chargeMoney}}</view>
       <button bindtap="btnAddMoney">+</button>    

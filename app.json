@@ -1,11 +1,12 @@
 {
+  "enableDebug": "true",
   "pages":[    
-    "pages/user/user",
     "pages/register/register",
     "pages/index/index",
-    "pages/verify/verify",
-    "pages/charge/charge",
     "pages/pay/pay", 
+    "pages/charge/charge",
+    "pages/user/user",
+    "pages/verify/verify",
     "pages/proto/proto",
     "pages/logs/logs"
   ],
@@ -14,6 +15,7 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "空中游乐园",
     "navigationBarTextStyle":"black",
+    "enableDebug":"true",
     "enablePullDownRefresh": "true"
   },
   "tabBar": {
@@ -25,13 +27,8 @@
       "pagePath": "pages/index/index",
       "iconPath" : "image/index.png",
       "selectedIconPath" : "image/index_select.png",
-      "text": "门票"
+      "text": "购票"
     },{
-      "pagePath": "pages/verify/verify",
-      "iconPath" : "image/index.png",
-      "selectedIconPath" : "image/index_select.png",
-      "text": "检票"
-    }, {
       "pagePath": "pages/user/user",
       "iconPath" : "image/user.png",
       "selectedIconPath" : "image/user_select.png",
