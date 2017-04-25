@@ -2,3 +2,60 @@
 .usermotto {
   margin-top: 200px;
 }
+
+.register{
+  width:100%;
+  margin:0 auto;
+}
+.register_phone{
+  display: flex;
+  margin:20px;
+  margin-left: 10px;
+  background:#F0F0F0;
+}
+.register_phone_lable{
+  margin:7px;
+  width:20%;
+  font-size:11pt;
+}
+.register_phone_input{
+  width:80%;
+  margin:5px;
+  font-size:11pt;
+}
+
+.register_code{
+  width: 92%;
+  display: flex;
+  margin-left: 10px;
+  background:#F0F0F0;
+}
+.register_code_lable{
+  margin:7px;
+  width:20%;
+  font-size:11pt;
+}
+.register_code_input{
+  width:55%;
+  margin:5px;
+  font-size:11pt;
+}
+.register_code_butt{
+  width:25%;
+  font-size:11pt;  
+}
+
+
+.register_reg{
+  margin:10px;
+  float:left;
+  width:80%;
+}
+.register_reg_butt{
+  font-size:12pt;
+  width:80%;
+}
+.register_reg_checkbox{
+  margin:10px;
+  margin-left: 30px;  
+}
