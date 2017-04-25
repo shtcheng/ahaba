@@ -89,7 +89,13 @@ Page({
       that.data.page = 0
       that.data.ticket = []
       that.data.hasMore = true
-      
+
+      var d = new Date();
+      var strNow = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate(); 
+      that.setData({
+        nowDate:strNow
+      })
+
       that.loadTicket()
   },
 
