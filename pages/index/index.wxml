@@ -5,7 +5,7 @@
 <view hidden="{{hiddenIndex}}" class="index">
   <!--跳转到用户中心-->  
   <view class="index_view_user">
-    <view class="index_view_user_time">{{nowDate}}</view>
+    <view class="index_view_user_time" bindtap="goToRegister">{{nowDate}}</view>
     <image src="../../image/user.png" class="index_view_user_user" bindtap="goToUserCenter"/>
   </view>
 

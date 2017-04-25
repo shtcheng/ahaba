@@ -11,7 +11,12 @@ Page({
     hasMore:true,
     tickets:[]
   },
-
+  goToRegister: function(){
+    wx.navigateTo({
+      url: '../register/register',
+      success: function(res){}
+    })
+  },
   goToUserCenter: function(){
     wx.navigateTo({
       url: '../user/user',
