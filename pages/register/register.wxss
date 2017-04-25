@@ -1,11 +1,6 @@
 /**account.wxss**/
-.usermotto {
-  margin-top: 200px;
-}
-
 .register{
   width:100%;
-  margin:0 auto;
 }
 .register_phone{
   display: flex;
@@ -36,26 +31,25 @@
   font-size:11pt;
 }
 .register_code_input{
-  width:55%;
   margin:5px;
   font-size:11pt;
 }
 .register_code_butt{
-  width:25%;
+  width:30%;
   font-size:11pt;  
 }
 
 
-.register_reg{
+.register_reg{  
+  margin-left: 10px;
   margin:10px;
-  float:left;
-  width:80%;
+  width: 92%;
 }
-.register_reg_butt{
+.register_reg_butt{  
   font-size:12pt;
-  width:80%;
+  width:100%;
 }
-.register_reg_checkbox{
+.register_reg_checkbox{  
+  width:100%;
   margin:10px;
-  margin-left: 30px;  
 }

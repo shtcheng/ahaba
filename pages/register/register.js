@@ -5,7 +5,7 @@ function countdown(that) {
   var second = that.data.second 
   if (second == 0) {
     that.setData({
-      codeButtText: "获取" ,
+      codeButtText: "获取验证码" ,
       disabledGetCode:false
     });
     return;
@@ -135,7 +135,7 @@ Page({
     that.setData({
       disabledGetCode:true,
       disabledSubmit : that.data.checkBox,
-      codeButtText:"获取"
+      codeButtText:"获取验证码"
     })  
   }
 })

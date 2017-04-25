@@ -10,11 +10,11 @@
   <view class="register_code">
     <label class="register_code_lable">验证码</label>
     <input bindinput="inputCode" type="number" maxlength="6" class="register_code_input" placeholder="请输入验证码"/> 
-    <button class="register_code_butt" style="background:#5d9cec;" disabled="{{disabledGetCode}}" bindtap="getCode">{{codeButtText}}</button>     
+    <button class="register_code_butt" style="background:#5d9cec;color:white" disabled="{{disabledGetCode}}" bindtap="getCode">{{codeButtText}}</button>     
   </view>
   
   <view class="register_reg">
-    <button class="register_reg_butt" style="background:#6ACC77;" disabled="{{disabledSubmit}}" bindtap="submit">注册</button>
+    <button class="register_reg_butt" style="background:#6ACC77;color:white" disabled="{{disabledSubmit}}" bindtap="submit">注册</button>
     <checkbox-group bindchange="listenCheckboxChange" class="register_reg_checkbox">
       <view style="display: flex;">
         <checkbox/>
