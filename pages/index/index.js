@@ -9,21 +9,62 @@ Page({
     loadingTicket: false,
 
     hasMore:true,
-    tickets:[]
+    tickets:[],
+
+    hiddenNotice : false,
+    hiddenMyTick : true,
+    myTickets:[],
+    totalNum : 0,
+    totalPrice:0
   },
+  //测试用
   goToRegister: function(){
     wx.navigateTo({
       url: '../register/register',
       success: function(res){}
     })
   },
+  //跳转到用户中心
   goToUserCenter: function(){
     wx.navigateTo({
       url: '../user/user',
       success: function(res){}
     })
   },
+  //显示购买列表
+  hiddenMyTick: function(){
+    var that = this
+    that.data.hiddenMyTick = !that.data.hiddenMyTick
+    that.setData({
+      hiddenFoorter: that.data.hiddenMyTick
+    })
+  },
+  //数量减少
+  subNum:function(e){
+    var that = this
+    console.log(e.currentTarget.id)
+  },
+  //数量增加
+  addNum:function(e){
+    var that = this
+    console.log(e.currentTarget.id)
+  },
+  //清空
+  clearAll : function(){
+    var that = this
+    that.data.myTickets = []
+    that.data.totalNum = 0
+    that.data.totalPrice = 0
+    that.data.hiddenNotice = true
+    that.setData({
+      totalNum: that.data.totalNum,
+      totalPrice :that.data.totalPrice,
+      myTicketList:that.data.myTickets,
+      hiddenNotice : that.data.hiddenNotice,
+    })
+  },
 
+  //隐藏
   hiddenAll: function(){
     var that = this
     that.setData({
@@ -122,6 +163,8 @@ Page({
     that.setData({
       hidden : false,
       hiddenIndex:true,
+      hiddenNotice : that.data.hiddenNotice,
+      hiddenFoorter: that.data.hiddenMyTick,
       nowDate:strNow
     })
     //微信登陆
@@ -160,7 +203,7 @@ Page({
                     that.setData({
                         hiddenIndex:false
                     });
-                    for(var i = 0; i < 3; i++){
+                    for(var i = 0; i < 5; i++){
                       var tmp = {}
                       tmp.id = i + 1
                       tmp.name = "水上世界"
@@ -175,10 +218,17 @@ Page({
                       tmp.bgTime = "8:00"
                       tmp.endTime = "18:00"
                       that.data.tickets.push(tmp) 
+                      tmp.number = i+1
+                      that.data.totalNum += tmp.number
+                      that.data.totalPrice += tmp.money * tmp.number
+                      that.data.myTickets.push(tmp)
                     }
                     that.setColor(that.data.tickets)
                     that.setData({
-                      ticketList:that.data.tickets
+                      ticketList:that.data.tickets,
+                      myTicketList:that.data.myTickets,
+                      totalNum:that.data.totalNum,
+                      totalPrice: that.data.totalPrice
                     });
                     console.log(that.data.tickets)
 
