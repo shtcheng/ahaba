@@ -24,7 +24,7 @@ Page({
     timeOut:60,
     second:0,
 
-    checkBox: true,
+    checkBox: false,
 
     phone: "",
     checkcode:0
@@ -81,6 +81,7 @@ Page({
 
   //提交
   submit: function(){
+    console.log("submit")
     var that = this  
     if (that.data.checkcode == 0 || that.data.phone.length == 0){
       return
@@ -125,6 +126,7 @@ Page({
   listenCheckboxChange : function(e){
      var that = this  
      that.data.checkBox = !that.data.checkBox
+     console.log(that.data.checkBox)
      that.setData({
       disabledSubmit : that.data.checkBox,
      })  

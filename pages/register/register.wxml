@@ -17,7 +17,7 @@
     <button class="register_reg_butt" style="background:#6ACC77;color:white" disabled="{{disabledSubmit}}" bindtap="submit">注册</button>
     <checkbox-group bindchange="listenCheckboxChange" class="register_reg_checkbox">
       <view style="display: flex;">
-        <checkbox/>
+        <checkbox checked="true"/>
         <navigator url="../proto/proto" style="margin:2px">登陆注册协议</navigator>
       </view>
     </checkbox-group>
