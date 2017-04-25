@@ -12,6 +12,13 @@ Page({
     tickets:[]
   },
 
+  goToUserCenter: function(){
+    wx.navigateTo({
+      url: '../user/user',
+      success: function(res){}
+    })
+  },
+
   hiddenAll: function(){
     var that = this
     that.setData({
@@ -22,9 +29,13 @@ Page({
   setColor : function(tickets){
     for(var i = 0; i < tickets.length; i++){
       if (i % 2 == 0){
-        tickets[i].color = "rgb(153, 204, 204)"
+        tickets[i].colorInfo = "#5D9CEC"
+        tickets[i].colorAdd = "#5D9CEC"
+        tickets[i].colorPrice = "#4B89DE"
       }else{
-        tickets[i].color = "rgb(255, 204, 102)"
+        tickets[i].colorInfo = "#49D1AD"
+        tickets[i].colorAdd = "#49D1AD"
+        tickets[i].colorPrice = "#35BD99"
       }
     }
   },
@@ -66,7 +77,6 @@ Page({
   },
   //加载更多
   onReachBottom: function() {
-      console.log("1111111111111111111")
       var that = this
       if (!that.data.hasMore) 
         return
@@ -74,7 +84,6 @@ Page({
   },
   //刷新处理
   onPullDownRefresh: function(e) {
-      console.log("22222222222222222222222222222")
       var that = this
       //数据重置
       that.data.page = 0
@@ -96,10 +105,13 @@ Page({
   //初始化
   onLoad: function () {
     var that = this
+    var d = new Date();
+    var strNow = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate(); 
     //动画显示
     that.setData({
       hidden : false,
-      hiddenIndex:true
+      hiddenIndex:true,
+      nowDate:strNow
     })
     //微信登陆
     wx.login({
@@ -137,7 +149,7 @@ Page({
                     that.setData({
                         hiddenIndex:false
                     });
-                    for(var i = 0; i < 20; i++){
+                    for(var i = 0; i < 3; i++){
                       var tmp = {}
                       tmp.id = i + 1
                       tmp.name = "水上世界"
@@ -145,10 +157,12 @@ Page({
                       if (i %2 == 0){
                         tmp.type = "成人票"
                       }else{
-                        tmp.type = "儿童票"
+                        tmp.type = "儿童/老人票"
                       }
                       
                       tmp.money = 80
+                      tmp.bgTime = "8:00"
+                      tmp.endTime = "18:00"
                       that.data.tickets.push(tmp) 
                     }
                     that.setColor(that.data.tickets)

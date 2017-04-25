@@ -2,24 +2,39 @@
 <loading hidden="{{hidden}}" >
     加载中...
 </loading>
-<view hidden="{{hiddenIndex}}" style="text-align:center"> 
-  <view wx:for="{{ticketList}}" wx:for-item="ticket" wx:key="id" style="margin:5px; width:90%">
-    <view style="display: flex; background:{{ticket.color}}">
-      <view style="margin:10px">
-        <view style="font-size:18pt;font-weight:bold">{{ticket.name}}</view>        
-        <view style="font-size:12pt;color:#999">{{ticket.addr}}</view>
-      </view>
-      <view style="display: flex;margin:22px">
-        <view>{{ticket.type}}: ￥</view>
-        <view>{{ticket.money}}</view>
-        <image src="../../image/icon_plus_alt2.png" style="width:20px; height:20px"></image>
-      </view>
-    </view>
+<view hidden="{{hiddenIndex}}" class="index">
+  <!--跳转到用户中心-->  
+  <view class="index_view_user">
+    <view class="index_view_user_time">{{nowDate}}</view>
+    <image src="../../image/user.png" class="index_view_user_user" bindtap="goToUserCenter"/>
   </view>
 
-  <view style="height:50px">
+  <!--商品列表-->  
+  <view wx:for="{{ticketList}}" wx:for-item="ticket" wx:key="id" class="index_view_for">
+    <view style="display: flex; width=100%">
+       <!--价格-->
+       <view style="background:{{ticket.colorPrice}}; height:110px;width:20%">
+        <view class="index_view_price">￥{{ticket.money}}</view>
+      </view>
+      <!--名称-->
+      <view style="background:{{ticket.colorInfo}};height:110px;width:70%">
+        <view class="index_view_info_name">{{ticket.name}}({{ticket.type}})</view>
+        <view class="index_view_info_time">{{ticket.bgTime}}至{{ticket.endTime}}</view>
+      </view>
+      <!--增加-->
+      <view style="background:{{ticket.colorAdd}};height:110px;width:10%">
+        <image src="../../image/icon_plus_alt2.png" class="index_view_info_add"/>
+      </view>
+    </view>    
   </view>
-  <view style="position:fixed; bottom:0rpx; display: flex;padding-bottom: 2px; width:100%">  
-    <button bindtap="goToPay" style="float:left;">结算</button>
+
+  <view style="height:150px">
+  </view>
+  <view class="index_footer">
+    <view class="index_footer_head">
+      <view class="index_footer_head_1">已选门票</view>
+      <view class="index_footer_head_2">清空</view>
+    </view>    
+    <button bindtap="goToPay" style="float:left;">去结算</button>
   </view>
 </view>

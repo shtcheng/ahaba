@@ -1,1 +1,73 @@
 /**index.wxss**/
+.index{
+    width: 100%;
+}
+.index_view_user{
+    width:90%;
+    display: flex;
+    margin-left: 10px; 
+}
+.index_view_user_time{
+    font-size:18pt;
+    margin: 5px;
+    margin-left: 40%; 
+    width:80%; 
+}
+.index_view_user_user{
+    width:20%;
+    height:40px;  
+}
+
+.index_view_for{
+    margin:5px;
+    width:95%;
+    margin-left: 10px; 
+}
+
+.index_view_price{
+    margin: 40px;
+    margin-left:10px;
+    color:white;
+    font-size:20pt;
+}
+.index_view_info_name{
+    margin: 23px;
+    margin-left:5px;
+    font-size:15pt;
+    color:white;
+}
+.index_view_info_time{
+    margin: 10px;
+    font-size:14pt;
+    color:white;
+}
+
+.index_view_info_add{
+    width:30px;
+    height:30px;
+    margin: 40px;
+    margin-left:0px;
+}
+
+.index_footer{
+    position:fixed; 
+    bottom:0rpx; 
+    width:100%; 
+    border:1px
+}
+.index_footer_head {
+    display: flex;
+    height: 45px;
+    background:#899CBA;
+}
+.index_footer_head_1{
+    margin: 10px;
+    margin-left:10px;
+    width: 85%;
+    color:white;
+}
+.index_footer_head_2{
+    margin: 10px;
+    width: 15%;
+    color:white;
+}
