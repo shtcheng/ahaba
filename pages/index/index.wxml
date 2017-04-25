@@ -3,6 +3,7 @@
     加载中...
 </loading>
 <view hidden="{{hiddenIndex}}" class="index">
+
   <!--跳转到用户中心-->  
   <view class="index_view_user">
     <view class="index_view_user_time" bindtap="goToRegister">{{nowDate}}</view>
@@ -11,25 +12,26 @@
 
   <!--商品列表-->  
   <view wx:for="{{ticketList}}" wx:for-item="ticket" class="index_view_for">
-    <view style="display: flex; width=100%">
+    <view style="display: flex; width=100%; height:85px">
        <!--价格-->
-       <view style="background:{{ticket.colorPrice}}; height:110px;width:20%">
+       <view style="background:{{ticket.colorPrice}}; height:100%;width:20%">
         <view class="index_view_price">￥{{ticket.money}}</view>
       </view>
       <!--名称-->
-      <view style="background:{{ticket.colorInfo}};height:110px;width:70%">
+      <view style="background:{{ticket.colorInfo}};height:100%;width:70%">
         <view class="index_view_info_name">{{ticket.name}}({{ticket.type}})</view>
         <view class="index_view_info_time">{{ticket.bgTime}}至{{ticket.endTime}}</view>
       </view>
       <!--增加-->
-      <view style="background:{{ticket.colorAdd}};height:110px;width:10%">
-        <image src="../../image/add_tick.png" class="index_view_info_add"/>
+      <view style="background:{{ticket.colorAdd}};height:100%;width:10%">
+        <image id="{{ticket.id}}"  bindtap="addNum" src="../../image/add_tick.png" class="index_view_info_add"/>
       </view>
     </view>    
   </view>
 
-  <view style="height:150px">
+  <view style="height:50px">
   </view>
+
   <!--结算中心-->
   <view class="index_footer">
     <!--操作-->
@@ -37,6 +39,7 @@
       <view class="index_footer_head_1">已选门票</view>
       <view bindtap="clearAll" class="index_footer_head_2">清空</view>
     </view>
+
     <!--已选票信息-->
     <view hidden="{{hiddenFoorter}}" class="index_footer_tick">
       <view class="index_footer_for" wx:for="{{myTicketList}}" wx:for-item="ticket">
@@ -53,6 +56,7 @@
         </view>
       </view>
     </view>
+
     <!--结算--> 
     <view class="index_footer_pay">
       <view class="index_footer_pay_total">
@@ -65,7 +69,7 @@
       <view class="index_footer_pay_pay">
         <button bindtap="goToPay" class="index_footer_pay_pay_butt">去结算</button>
       </view>      
-    </view> 
-    
+    </view>     
   </view>
+
 </view>

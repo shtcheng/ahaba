@@ -32,11 +32,11 @@
 }
 .register_code_input{
   margin:5px;
-  width: 50%;
+  width: 57%;
   font-size:11pt;
 }
 .register_code_butt{
-  width:30%;
+  width:23%;
   font-size:11pt; 
   -webkit-appearance: button; 
 }

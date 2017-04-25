@@ -5,11 +5,10 @@
 .index_view_user{
     width:90%;
     display: flex;
-    margin-left: 10px; 
+    margin-left: 5px; 
 }
 .index_view_user_time{
     font-size:18pt;
-    margin: 5px;
     margin-left: 40%; 
     width:80%; 
 }
@@ -20,32 +19,32 @@
 
 .index_view_for{
     margin:5px;
-    width:95%;
-    margin-left: 10px; 
+    width:98%;
+    margin-left: 3px; 
 }
 
 .index_view_price{
-    margin: 40px;
-    margin-left:10px;
+    margin: 30px;
+    margin-left:3px;
     color:white;
-    font-size:20pt;
+    font-size:17pt;
 }
 .index_view_info_name{
-    margin: 23px;
-    margin-left:5px;
-    font-size:15pt;
+    margin: 15px;
+    margin-left:3px;
+    font-size:13pt;
     color:white;
 }
 .index_view_info_time{
     margin: 10px;
-    font-size:14pt;
+    font-size:12pt;
     color:white;
 }
 
 .index_view_info_add{
     width:30px;
     height:30px;
-    margin: 40px;
+    margin: 30px;
     margin-left:0px;
 }
 
@@ -139,7 +138,7 @@
     border-radius:50%;
     position:absolute;
     right:-15px;
-    top:-5px;
+    top:0px;
 }
 .index_footer_pay_pay{
     width: 30%;
