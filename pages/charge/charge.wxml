@@ -1,14 +1,28 @@
 
 <!--account.wxml-->
 <view class="content">
-    <view class="layout-top">
-      <view > 当前余额：{{currentMoney}} 元</view>
+  <view class="chargeinfo">
+  <view style="font-size:20pt; color:#aaaaaa;margin-left:10%" >{{phonenumber}}</view>
+  <view class="classname" style="width:30%"></view>
+  <image src="../../image/user.png" style="width:32px; height:32px;margin-right:10%"></image>
+  </view>
+
+  <view class="chargeinfo">
+  <view class="classname" style="background:#aaaaaa; width:90%; height:1px;margin-left:10%;margin-right:10%"></view>
+  </view>
+
+    <view class="motto50px"></view>
+
+    <view class="chargelabel" style="margin-left:10%">选择充值金额：</view>
+    <view class="motto50px"></view>
+    <view class="chargeinfo">
+      <button bindtap="chargeMinus">-</button>
+      <view ><label >{{chargeMoney}}</label></view>
+      <button bindtap="chargeAdd">+</button>    
     </view>
-    <view class="userinfo">
-      <view class="motto50px"></view>
-      <button bindtap="btnMinusMoney">-</button>
-      <view >{{chargeMoney}}</view>
-      <button bindtap="btnAddMoney">+</button>    
+    <view class="motto50px"></view>
+    <view class="chargebutt">
+    <button class="charge_butt" style="background:#6ACC77;color:white" bindtap="chargesubmit">确定</button>
     </view>
 
 </view>

@@ -1,14 +1,24 @@
 /**account.wxss**/
-.userinfo {
+.chargeinfo {
   display: flex;
   flex-direction: row;
   align-items: center;
+
 }
 
 .motto50px {
-  margin-top: 100px;
+  margin-top: 20px;
 }
 
 motto10px {
   margin-top: 10px;
+}
+
+charge_label {
+
+}
+
+.charge_butt{  
+  font-size:12pt;
+  width:80%;
 }

@@ -7,6 +7,7 @@ Page({
     //motto: '你好，小程序！',
     currentMoney: '0.00',
     chargeMoney:100,
+    phonenumber:13730842688,
     userInfo: {}
   },
 
@@ -19,25 +20,26 @@ Page({
   },
 
   //充值按钮事件处理
-  btnMinusMoney: function () {
-    temp_money=chargeMoney.value-100;
-    if(temp_money < 0 ) {
-      temp_money = 0;
-    }
-//    chargeMoney = temp_money;
-    this.setData({
-      chargeMoney:temp_money
-    })
-    wx.navigateTo({
-      url: '../logs/logs'
+  chargeMinus: function () {
+
+    wx.scanCode({
+      success: function(res) {
+        console.log(res)
+      },
+      fail: function() {
+        console.log(res)
+      },
+      complete: function(res) {
+        console.log(res)
+      }
     })
   },
   //充值按钮事件处理
-  btnAddMoney: function () {
+  chargeAdd: function (res) {
     temp_money=chargeMoney.value+100;
 //    chargeMoney = temp_money;
     this.setData({
-      chargeMoney:temp_money
+      "chargeMoney":temp_money
     })
   },
 
