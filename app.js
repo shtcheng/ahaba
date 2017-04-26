@@ -10,6 +10,7 @@ App({
     userInfo:null,//用户微信信息 
     openid:null,//微信openid    
 
+    parkcode: null,//游乐场
     phone:null,//手机号
     register:false,//是否注册
     pAppId:null,//用户平台appid

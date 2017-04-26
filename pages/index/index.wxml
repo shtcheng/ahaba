@@ -6,21 +6,26 @@
 
   <!--跳转到用户中心-->  
   <view class="index_view_user">
-    <view class="index_view_user_time" bindtap="goToRegister">{{nowDate}}</view>
+    <!--
+    <picker class="index_view_user_time"  mode="date" value="{{dateValue}}" start="{{startDate}}" end="2999-12-12" bindchange="datePickerBindchange">
+      {{nowDate}}
+    </picker>
+    -->
+    <view class="index_view_user_time">{{nowDate}}</view>
     <image src="../../image/user.png" class="index_view_user_user" bindtap="goToUserCenter"/>
   </view>
 
   <!--商品列表-->  
-  <view wx:for="{{ticketList}}" wx:for-item="ticket" class="index_view_for">
+  <view wx:for="{{ticketList}}" wx:for-item="ticket" wx:key="id" class="index_view_for">
     <view style="display: flex; width=100%; height:85px">
        <!--价格-->
        <view style="background:{{ticket.colorPrice}}; height:100%;width:20%">
-        <view class="index_view_price">￥{{ticket.money}}</view>
+        <view class="index_view_price">￥{{ticket.price}}</view>
       </view>
       <!--名称-->
       <view style="background:{{ticket.colorInfo}};height:100%;width:70%">
-        <view class="index_view_info_name">{{ticket.name}}({{ticket.type}})</view>
-        <view class="index_view_info_time">{{ticket.bgTime}}至{{ticket.endTime}}</view>
+        <view class="index_view_info_name">{{ticket.itemname}}({{ticket.ticketname}})</view>
+        <view class="index_view_info_time">{{ticket.dt_open}}至{{ticket.dt_close}}</view>
       </view>
       <!--增加-->
       <view style="background:{{ticket.colorAdd}};height:100%;width:10%">
@@ -42,9 +47,9 @@
 
     <!--已选票信息-->
     <view hidden="{{hiddenFoorter}}" class="index_footer_tick">
-      <view class="index_footer_for" wx:for="{{myTicketList}}" wx:for-item="ticket">
-        <view class="index_footer_tick_name">{{ticket.type}}</view>
-        <view class="index_footer_tick_price">￥{{ticket.money * ticket.number}}</view>
+      <view class="index_footer_for" wx:for="{{myTicketList}}" wx:for-item="ticket" wx:key="id">
+        <view class="index_footer_tick_name">{{ticket.ticketname}}</view>
+        <view class="index_footer_tick_price">￥{{ticket.price * ticket.number}}</view>
         <view class="index_footer_tick_number">
           <image id="{{ticket.id}}" bindtap="subNum" class="index_footer_tick_number_img" src="../../image/number_sub.png"/>
           <view class="index_footer_tick_number_num">

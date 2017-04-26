@@ -11,17 +11,31 @@ Page({
     hasMore:true,
     tickets:[],
 
+    buyDate:"",
     hiddenNotice : true,
     hiddenMyTick : true,
     myTickets:[],
     totalNum : 0,
     totalPrice:0
   },
-  //测试用
-  goToRegister: function(){
+  //转到结算页面
+  goToPay : function(){
+    var that = this
+    if (0 == that.data.myTickets.length){
+      console.log("empty")
+      return
+    }
     wx.navigateTo({
-      url: '../register/register',
+      url: '../pay/pay?date='+that.data.buyDate,
       success: function(res){}
+    })
+  },
+  //日期
+  datePickerBindchange:function(e){
+    var that = this
+    that.data.buyDate = e.detail.value
+    that.setData({
+      nowDate: that.data.buyDate
     })
   },
   //跳转到用户中心
@@ -58,7 +72,7 @@ Page({
     that.data.hiddenNotice = false
     for(var i = 0; i < that.data.myTickets.length; i++){
       that.data.totalNum += that.data.myTickets[i].number
-      that.data.totalPrice += that.data.myTickets[i].number * that.data.myTickets[i].money
+      that.data.totalPrice += that.data.myTickets[i].number * that.data.myTickets[i].price
     }
     that.setData({
       totalNum : that.data.totalNum,
@@ -67,7 +81,7 @@ Page({
       hiddenNotice : that.data.hiddenNotice,
     })
   },
-  getDate : function(){
+  getNowDate : function(){
     var d = new Date()
     return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()
   },
@@ -99,7 +113,6 @@ Page({
     
     that.calShow()
     wx.setStorageSync('myTicket', that.data.myTickets)    
-    wx.setStorageSync('lastTime', that.getDate())
   },
   //数量减少
   subNum:function(e){
@@ -201,44 +214,33 @@ Page({
       that.data.ticket = []
       that.data.hasMore = true
 
-      var d = new Date();
-      var strNow = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate(); 
-      that.setData({
-        nowDate:strNow
-      })
-
       that.loadTicket()
   },
 
-  //控制是否显示商品
   onShow: function() {
+      var that = this
       if(app.globalData.register){
         that.setData({
           hiddenIndex:false
         });
       }
+
+      that.data.myTickets = wx.getStorageSync('myTicket')   
+      that.calShow()
   },
 
   //初始化
   onLoad: function () {
     var that = this
-    var d = new Date();
-    var strNow = that.getDate()
-    if (wx.getStorageSync('lastTime') != strNow){
-      wx.setStorageSync('lastTime', strNow)
-      wx.setStorageSync('myTicket', [])    
-    }
-
-    that.data.myTickets = wx.getStorageSync('myTicket')   
-    that.calShow()
-
+    that.data.buyDate = that.getNowDate()
     //动画显示
     that.setData({
       hidden : false,
       hiddenIndex:true,
       hiddenFoorter: that.data.hiddenMyTick,
-      nowDate:strNow
-    })    
+      nowDate:that.data.buyDate,
+      startDate:that.data.buyDate
+    }) 
 
     //微信登陆
     wx.login({
@@ -279,17 +281,17 @@ Page({
                     for(var i = 0; i < 5; i++){
                       var tmp = {}
                       tmp.id = i + 1
-                      tmp.name = "水上世界"
+                      tmp.itemname = "水上世界"
                       tmp.addr = "泸州游乐园"
                       if (i %2 == 0){
-                        tmp.type = "成人票"
+                        tmp.ticketname = "成人票"
                       }else{
-                        tmp.type = "儿童/老人票"
+                        tmp.ticketname = "儿童/老人票"
                       }
                       
-                      tmp.money = 80
-                      tmp.bgTime = "8:00"
-                      tmp.endTime = "18:00"
+                      tmp.price = 80
+                      tmp.dt_open = "8:00"
+                      tmp.dt_close = "18:00"
                       that.data.tickets.push(tmp) 
                     }
                     that.setColor(that.data.tickets)

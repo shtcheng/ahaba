@@ -38,7 +38,8 @@
 .register_code_butt{
   width:23%;
   font-size:11pt; 
-  -webkit-appearance: button; 
+  border:none; 
+  border-radius: 0;
 }
 
 
@@ -50,7 +51,8 @@
 .register_reg_butt{  
   font-size:12pt;
   width:100%;
-  -webkit-appearance: button;
+  border:none;
+  border-radius: 0;
 }
 .register_reg_checkbox{  
   width:100%;

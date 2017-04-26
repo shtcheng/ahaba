@@ -3,18 +3,18 @@
     width: 100%;
 }
 .index_view_user{
-    width:90%;
+    width:99%;
     display: flex;
-    margin-left: 5px; 
 }
 .index_view_user_time{
+    margin: 10px;
     font-size:18pt;
     margin-left: 40%; 
-    width:80%; 
+    width:75%; 
 }
 .index_view_user_user{
-    width:20%;
-    height:40px;  
+    width:25%;
+    height:51px;  
 }
 
 .index_view_for{
@@ -131,7 +131,7 @@
     width:20px;
     height:20px;
     line-height:20px;
-    font-size:10px;
+    font-size:10pt;
     color:#fff;
     text-align:center;
     background-color:#f00;
@@ -148,5 +148,6 @@
     height: 100%;
     color:white;
     background:#6ACC77;
-    -webkit-appearance: button;    
+    border:none;
+    border-radius: 0;
 }
