@@ -18,6 +18,12 @@ Page({
     totalNum : 0,
     totalPrice:0
   },
+  goToRegister:function(){
+    wx.navigateTo({ 
+      url: '../register/register',
+      success: function(res){}
+    })
+  },
   //转到结算页面
   goToPay : function(){
     var that = this
