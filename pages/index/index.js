@@ -1,5 +1,6 @@
 //index.js
 //获取应用实例
+var sha1 = require('../../utils/sha1.js')
 var app = getApp();
 Page({
    data: {
@@ -17,12 +18,6 @@ Page({
     myTickets:[],
     totalNum : 0,
     totalPrice:0
-  },
-  goToRegister:function(){
-    wx.navigateTo({ 
-      url: '../register/register',
-      success: function(res){}
-    })
   },
   //转到结算页面
   goToPay : function(){
@@ -118,7 +113,7 @@ Page({
     }
     
     that.calShow()
-    wx.setStorageSync('myTicket', that.data.myTickets)    
+    wx.setStorageSync(app.globalData.storage_MyTicket, that.data.myTickets)    
   },
   //数量减少
   subNum:function(e){
@@ -145,7 +140,7 @@ Page({
       hiddenNotice : that.data.hiddenNotice,
       hiddenFoorter: that.data.hiddenMyTick,
     })
-    wx.setStorageSync('myTicket', that.data.myTickets)
+    wx.setStorageSync(app.globalData.storage_MyTicket, that.data.myTickets)
   },
 
   //隐藏
@@ -225,13 +220,7 @@ Page({
 
   onShow: function() {
       var that = this
-      if(app.globalData.register){
-        that.setData({
-          hiddenIndex:false
-        });
-      }
-
-      that.data.myTickets = wx.getStorageSync('myTicket')   
+      that.data.myTickets = wx.getStorageSync(app.globalData.storage_MyTicket)   
       that.calShow()
   },
 
@@ -242,103 +231,24 @@ Page({
     //动画显示
     that.setData({
       hidden : false,
-      hiddenIndex:true,
       hiddenFoorter: that.data.hiddenMyTick,
       nowDate:that.data.buyDate,
       startDate:that.data.buyDate
     }) 
 
-    //微信登陆
-    wx.login({
-      fail: function() {
-        that.hiddenAll()           
-      },
-      success: function(res){            
-        if(res.code) {  
-            //获取用户信息
-             wx.getUserInfo({
-                success: function (res) {
-                   app.globalData.userInfo = res.userInfo;
-                   console.log(app.globalData.userInfo)
-                },
-                fail: function() {
-                  that.hiddenAll()
-                }
-            });  
-
-            var d = app.globalData;
-            var strUrl = 'https://api.weixin.qq.com/sns/jscode2session?appid='+d.appid+'&secret='+d.secret+'&js_code='+res.code+'&  grant_type=authorization_code';
-            //获取openid
-            wx.request({
-                url: strUrl,
-                data: {},
-                method: 'GET',
-                fail: function() {
-                  that.hiddenAll()           
-                },
-                success: function(res){
-                    app.globalData.openid = res.data.openid;
-                    console.log(app.globalData.openid)
-
-                    //测试数据
-                    that.setData({
-                        hiddenIndex:false
-                    });
-                    for(var i = 0; i < 5; i++){
-                      var tmp = {}
-                      tmp.id = i + 1
-                      tmp.itemname = "水上世界"
-                      tmp.addr = "泸州游乐园"
-                      if (i %2 == 0){
-                        tmp.ticketname = "成人票"
-                      }else{
-                        tmp.ticketname = "儿童/老人票"
-                      }
-                      
-                      tmp.price = 80
-                      tmp.dt_open = "8:00"
-                      tmp.dt_close = "18:00"
-                      that.data.tickets.push(tmp) 
-                    }
-                    that.setColor(that.data.tickets)
-                    that.setData({
-                      ticketList:that.data.tickets,
-                    });
-                    console.log(that.data.tickets)
-
-                    //是否绑定手机
-                    wx.request({
-                      url: app.globalData.rootUrl + "/checkBind?openid="+app.globalData.openid,
-                      data: {},
-                      method: 'GET',
-                      fail: function() {
-                        that.hiddenAll()           
-                      },
-                      success: function(res){
-                        //拉取商品信息
-                        that.loadTicket()
-
-                        if (0 == res.msg){
-                          wx.navigateTo({
-                            url: '../register/register',
-                            success: function(res){}
-                          })
-                        }else{
-                          //app.globalData.phone = that.data.phone
-                          app.globalData.register = true
-                          that.setData({
-                            hiddenIndex:false
-                          });
-                        }
-                      } 
-                  });
-              }
-            });  
-          }else {
-              console.log(res.errMsg)             
-              that.hiddenAll()           
-          }          
+    //获取用户平台信息
+    wx.request({
+      url: app.globalData.rootUrl + "/getuser?toke="+sha1.hex_sha1("getuser"+app.globalData.pAppKey + app.globalData.phone) + "&openid=&mobile=" + app.globalData.phone,
+      data: {},
+      method: 'GET',
+      success: function(res){
+        if (res.result == 0){
+          app.globalData.pUserInfo = JSON.parse(res.data)
+        }
       }
     });
+    
+    //拉取商品信息  
+    that.loadTicket()
   }
 })

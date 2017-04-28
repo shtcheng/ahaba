@@ -106,7 +106,7 @@ Page({
           app.globalData.register = true
           app.globalData.phone = that.data.phone
           //返回首页
-          wx.navigateTo({
+          wx.redirectTo({
             url: 'pages/index/index',
             success: function(res){}
           })
@@ -133,7 +133,7 @@ Page({
   },
 
   onLoad: function () {
-    var that = this  
+    var that = this
     that.setData({
       disabledGetCode:true,
       disabledSubmit : that.data.checkBox,

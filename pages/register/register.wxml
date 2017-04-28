@@ -14,7 +14,7 @@
   </view>
   
   <view class="register_reg">
-    <button class="register_reg_butt" style="background:#6ACC77;color:white" disabled="{{disabledSubmit}}" bindtap="submit">注册</button>
+    <button class="register_reg_butt" style="background:#6ACC77;color:white" disabled="{{disabledSubmit}}" bindtap="submit">确定</button>
     <checkbox-group bindchange="listenCheckboxChange" class="register_reg_checkbox">
       <view style="display: flex;">
         <checkbox checked="true"/>
