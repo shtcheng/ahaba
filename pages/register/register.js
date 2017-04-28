@@ -86,7 +86,18 @@ Page({
 
   //提交
   submit: function(){
+    //测试
     var that = this
+    app.globalData.phone = that.data.phone
+    wx.setStorageSync(app.globalData.storage_Phone, app.globalData.phone)
+    wx.redirectTo({
+            url: '../index/index',
+            success: function(res){}
+          })
+          return
+
+          
+    //var that = this
     if (that.data.checkcode.length == 0 || that.data.phone.length == 0){
       return
     }
@@ -110,11 +121,11 @@ Page({
           }
 
           app.globalData.phone = that.data.phone
-          wx.setStorageSync(that.globalData.storage_Phone, app.globalData.phone)
+          wx.setStorageSync(app.globalData.storage_Phone, app.globalData.phone)
           
           //返回首页
           wx.redirectTo({
-            url: 'pages/index/index',
+            url: '../index/index',
             success: function(res){}
           })
         }
@@ -124,7 +135,7 @@ Page({
   //用户协议跳转
   goToProto : function(){
     wx.navigateTo({
-      url: 'pages/proto/proto',
+      url: '../proto/proto',
       success: function(res){}
     })
   },
@@ -146,6 +157,43 @@ Page({
       disabledGetCode:true,
       disabledSubmit : that.data.checkBox,
       codeButtText:"获取"
-    })  
+    })
+
+
+    //测试
+    //获取号码缓存
+          app.globalData.phone = wx.getStorageSync(app.globalData.storage_Phone)
+          if (0 != app.globalData.phone.length){
+            wx.redirectTo({
+              url: '../index/index',
+              success: function(res){}
+            })
+          }
+          return
+
+    //获取pAppKey
+    wx.request({
+      url: app.globalData.rootUrl + "/appkey?appid="+app.globalData.pAppId,
+      data: {},
+      method: 'GET',
+      success: function(res){
+        if (res.result > 0){
+          var recvData = JSON.parse(res.data)
+          app.globalData.pAppKey = recvData.key
+          console.log(app.globalData.pAppKey)
+
+          //获取号码缓存
+          app.globalData.phone = wx.getStorageSync(app.globalData.storage_Phone)
+          if (0 != app.globalData.phone.length){
+            wx.redirectTo({
+              url: '../index/index',
+              success: function(res){}
+            })
+          }
+        }else{
+          console.log(res.message)
+        }
+      }
+    });  
   }
 })
