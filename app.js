@@ -37,6 +37,7 @@ App({
         if (res.result > 0){
           var recvData = JSON.parse(res.data)
           that.globalData.pAppKey = recvData.key
+          console.log(that.globalData.pAppKey)
 
           //获取号码缓存
           that.globalData.phone = wx.getStorageSync(that.globalData.storage_Phone)
