@@ -1,8 +1,8 @@
 {
   "enableDebug": "true",
-  "pages":[
-    "pages/register/register",
-    "pages/index/index",        
+  "pages":[    
+    "pages/index/index", 
+    "pages/register/register",       
     "pages/pay/pay", 
     "pages/charge/charge",
     "pages/user/user",

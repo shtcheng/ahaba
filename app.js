@@ -52,24 +52,11 @@ App({
               success: function(res){}
             })
           }
+        }else{
+          console.log(res.message)
         }
       }
     });
-
-
-    //获取号码缓存  先放外面测试
-          that.globalData.phone = wx.getStorageSync(that.globalData.storage_Phone)
-          if (0 == that.globalData.phone.length){
-            wx.redirectTo({
-              url: 'pages/register/register',
-              success: function(res){}
-            })
-          }else{
-            wx.redirectTo({
-              url: 'pages/index/index',
-              success: function(res){}
-            })
-          }
   },
 
   globalData:{
@@ -83,7 +70,7 @@ App({
     storage_MyTicket : "myTicket",
     storage_ParkCode : "parkcode",
 
-    parkcode: "",//游乐场
+    parkcode: "0001",//游乐场
     phone:"",//手机号
     pAppId:"cpp.7f0ef3584bd58f14891ca3646378",//用户平台appid
     pAppKey:"",//用户平台app key 

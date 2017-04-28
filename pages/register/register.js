@@ -1,4 +1,5 @@
 //获取应用实例
+var sha1 = require('../../utils/sha1.js')
 var app = getApp()
 //倒计时
 function countdown(that) {
@@ -27,12 +28,13 @@ Page({
     checkBox: false,
 
     phone: "",
-    checkcode:0
+    checkcode:"",
+    check:{},
   },
   
-  //获取电话号码
+  //电话号码输入
   getPhone : function(e){
-    var that = this  
+    var that = this
     var phone = /^0?1[3|4|5|8][0-9]\d{8}$/; 
     if(!phone.test(e.detail.value)) { 
         that.setData({
@@ -46,6 +48,16 @@ Page({
     that.data.phone = e.detail.value
   },
 
+  //验证码输入
+  inputCode: function(e) {
+    if (isNaN(e.detail.value)){
+       return
+    }
+    
+    var that = this  
+    that.data.checkcode = e.detail.value
+  },
+
   //获取验证码
   getCode: function() {
     var that = this  
@@ -55,56 +67,51 @@ Page({
     countdown(that)
 
     //获取验证码
+    var token = sha1.hex_sha1("sendsms"+app.globalData.pAppKey+that.data.phone)
     wx.request({
-        url: app.globalData.rootUrl + "/getCVC?phone="+that.data.phone,
+        url: app.globalData.rootUrl + "/sendsms?token="+token+"&mobile=" + that.data.phone,
         data: {},
         method: 'GET',
         success: function(res){
-          if (res.status != 0) {
-            console.log(res)
-            that.setData({disabledGetCode:false})            
+          if (res.result <= 0) {
+            console.log(res.message)                    
             return
-          } 
+          }
+
+          that.data.check.phone=that.data.phone
+          that.data.check.code=res.data
         } 
      });     
-  },
-
-  //验证码
-  inputCode: function(e) {
-    if (isNaN(e.detail.value)){
-       return
-    }
-    
-    var that = this  
-    that.data.checkcode = parseInt(e.detail.value)
-  },
+  },  
 
   //提交
   submit: function(){
-    console.log("submit")
-    var that = this  
-    if (that.data.checkcode == 0 || that.data.phone.length == 0){
+    var that = this
+    if (that.data.checkcode.length == 0 || that.data.phone.length == 0){
       return
     }
-    var phone = /^0?1[3|4|5|8][0-9]\d{8}$/; 
-    if(!phone.test(that.data.phone)) { 
-        return;
-    } 
+    if(that.data.checkcode != that.data.check.code 
+      || that.data.phone != that.data.check.phone){
+        console.log("error check code.")
+        return
+    }
 
-    //绑定手机
+    //注册或登陆
+    var token = sha1.hex_sha1("reguser"+app.globalData.pAppKey+that.data.phone)
     wx.request({
-        url: app.globalData.rootUrl + "/bindPhone?phone="+that.data.phone+"&cvc="+that.data.checkcode + 
+        url: app.globalData.rootUrl + "/reguser?token="+token+"&mobile="+that.data.phone + 
           "&openid="+app.globalData.openid,
         data: {},
         method: 'GET',
         success: function(res){
-          if (res.status != 0) {
-            console.log(res)
+          if (res.result < 0) {
+            console.log(res.message)
             return
           }
 
-          app.globalData.register = true
           app.globalData.phone = that.data.phone
+          wx.setStorageSync(that.globalData.storage_Phone, app.globalData.phone)
+          
           //返回首页
           wx.redirectTo({
             url: 'pages/index/index',
@@ -126,7 +133,6 @@ Page({
   listenCheckboxChange : function(e){
      var that = this  
      that.data.checkBox = !that.data.checkBox
-     console.log(that.data.checkBox)
      that.setData({
       disabledSubmit : that.data.checkBox,
      })  
@@ -134,6 +140,8 @@ Page({
 
   onLoad: function () {
     var that = this
+    that.data.check.phone=""
+    that.data.check.code=""
     that.setData({
       disabledGetCode:true,
       disabledSubmit : that.data.checkBox,

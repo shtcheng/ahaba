@@ -19,11 +19,12 @@ Page({
     totalNum : 0,
     totalPrice:0
   },
+
   //转到结算页面
   goToPay : function(){
     var that = this
     if (0 == that.data.myTickets.length){
-      console.log("empty")
+      console.log("goToPay empty")
       return
     }
     wx.navigateTo({
@@ -41,6 +42,14 @@ Page({
   },
   //跳转到用户中心
   goToUserCenter: function(){
+    if (app.globalData.phone.length == 0){
+      wx.navigateTo({
+        url: '../register/register',
+        success: function(res){}
+      })
+      return
+    }
+
     wx.navigateTo({
       url: '../user/user',
       success: function(res){}
@@ -92,7 +101,7 @@ Page({
     var bHave = false
     //是否有
     for(var i = 0; i < that.data.myTickets.length; i++){
-      if (that.data.myTickets[i].id == id) {
+      if (that.data.myTickets[i].tid == id) {
           bHave = true
           that.data.myTickets[i].number += iNumber
           if (that.data.myTickets[i].number <= 0){
@@ -104,7 +113,7 @@ Page({
 
     if (!bHave && iNumber > 0){
       for(var i = 0; i < that.data.tickets.length; i++){
-        if (id == that.data.tickets[i].id){
+        if (id == that.data.tickets[i].tid){
           var newTick = that.deepCopy(that.data.tickets[i])
           newTick.number = iNumber
           that.data.myTickets.push(newTick)
@@ -143,14 +152,6 @@ Page({
     wx.setStorageSync(app.globalData.storage_MyTicket, that.data.myTickets)
   },
 
-  //隐藏
-  hiddenAll: function(){
-    var that = this
-    that.setData({
-        hidden: true
-    })
-  },
-
   setColor : function(tickets){
     for(var i = 0; i < tickets.length; i++){
       if (i % 2 == 0){
@@ -172,22 +173,29 @@ Page({
       return
     }    
 
+    wx.showLoading({
+    })
+
+    var strUrl = app.globalData.rootUrl +  "/getdata?query=item&parkcode=" + app.globalData.parkcode
     wx.request({
-      url: app.globalData.rootUrl + '/getTicket?page='+(that.data.page++)+'&pnum='+that.data.pnum,
+      url: strUrl,
       data: {},
       method: 'GET',
       success: function(res){
-        if (res.status != 0) {
-          console.log(res)
+        if (res.result <= 0) {
+          console.log(res.message)
           return
         }
-        if (res.msg.length == 0){
+
+        var ticket = JSON.parse(res.data)
+        if (ticket.length == 0){
           that.data.hasMore = false
         }else{
-          that.data.hasMore = true
-          that.setColor(res.msg)
-          that.setData({                
-            ticketList : that.tickets.concat(res.msg),
+          that.data.hasMore = false 
+          that.data.tickets.concat(ticket)
+          that.setColor(that.data.tickets)        
+          that.setData({
+            ticketList : that.data.tickets,
           });
         }
       },
@@ -195,13 +203,14 @@ Page({
         that.data.page--
       },
       complete: function() {
-        that.hiddenAll()
+        wx.hideLoading()
         that.data.loadingTicket = false
       }
     });
   },
   //加载更多
   onReachBottom: function() {
+      return
       var that = this
       if (!that.data.hasMore) 
         return
@@ -212,7 +221,7 @@ Page({
       var that = this
       //数据重置
       that.data.page = 0
-      that.data.ticket = []
+      that.data.tickets = []
       that.data.hasMore = true
 
       that.loadTicket()
@@ -227,26 +236,41 @@ Page({
   //初始化
   onLoad: function () {
     var that = this
+    //测试数据
+    for(var i = 0; i < 5; i++){
+                      var tmp = {}
+                      tmp.tid = i + 1
+                      tmp.itemname = "水上世界"
+                      tmp.addr = "泸州游乐园"
+                      if (i %2 == 0){
+                        tmp.ticketname = "成人票"
+                      }else{
+                        tmp.ticketname = "儿童/老人票"
+                      }
+                      
+                      tmp.price = 80
+                      tmp.dt_open = "8:00"
+                      tmp.dt_close = "18:00"
+                      that.data.tickets.push(tmp) 
+                    }
+                    that.setColor(that.data.tickets)
+                    that.setData({
+                      ticketList:that.data.tickets,
+                    });
+
+    var oldPackCode = wx.getStorageSync(app.globalData.storage_ParkCode)
+    if (oldPackCode != app.globalData.parkcode){
+      wx.setStorageSync(app.globalData.storage_ParkCode, app.globalData.parkcode)
+      wx.setStorageSync(app.globalData.storage_MyTicket, [])
+    }
+
     that.data.buyDate = that.getNowDate()
     //动画显示
     that.setData({
-      hidden : false,
       hiddenFoorter: that.data.hiddenMyTick,
       nowDate:that.data.buyDate,
       startDate:that.data.buyDate
-    }) 
-
-    //获取用户平台信息
-    wx.request({
-      url: app.globalData.rootUrl + "/getuser?toke="+sha1.hex_sha1("getuser"+app.globalData.pAppKey + app.globalData.phone) + "&openid=&mobile=" + app.globalData.phone,
-      data: {},
-      method: 'GET',
-      success: function(res){
-        if (res.result == 0){
-          app.globalData.pUserInfo = JSON.parse(res.data)
-        }
-      }
-    });
+    })
     
     //拉取商品信息  
     that.loadTicket()

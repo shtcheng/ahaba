@@ -1,7 +1,4 @@
 <!--index.wxml-->
-<loading hidden="{{hidden}}" >
-    加载中...
-</loading>
 <view hidden="{{hiddenIndex}}" class="index">
 
   <!--跳转到用户中心-->  
@@ -29,7 +26,7 @@
       </view>
       <!--增加-->
       <view style="background:{{ticket.colorAdd}};height:100%;width:10%">
-        <image id="{{ticket.id}}"  bindtap="addNum" src="../../image/add_tick.png" class="index_view_info_add"/>
+        <image id="{{ticket.tid}}"  bindtap="addNum" src="../../image/add_tick.png" class="index_view_info_add"/>
       </view>
     </view>    
   </view>
@@ -51,13 +48,13 @@
         <view class="index_footer_tick_name">{{ticket.ticketname}}</view>
         <view class="index_footer_tick_price">￥{{ticket.price * ticket.number}}</view>
         <view class="index_footer_tick_number">
-          <image id="{{ticket.id}}" bindtap="subNum" class="index_footer_tick_number_img" src="../../image/number_sub.png"/>
+          <image id="{{ticket.tid}}" bindtap="subNum" class="index_footer_tick_number_img" src="../../image/number_sub.png"/>
           <view class="index_footer_tick_number_num">
             <view style="visibility:hidden">A</view>
             {{ticket.number}}
             <view style="visibility:hidden">B</view>
           </view>
-          <image id="{{ticket.id}}" bindtap="addNum" class="index_footer_tick_number_img" src="../../image/number_add.png"/>
+          <image id="{{ticket.tid}}" bindtap="addNum" class="index_footer_tick_number_img" src="../../image/number_add.png"/>
         </view>
       </view>
     </view>
