@@ -80,6 +80,7 @@ App({
 
     storage_Phone : "phone",
     storage_MyTicket : "myTicket",
+    storage_ParkCode : "parkcode",
 
     parkcode: "",//游乐场
     phone:"",//手机号
