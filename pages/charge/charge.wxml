@@ -2,25 +2,29 @@
 <!--account.wxml-->
 <view class="content">
   <view class="chargeinfo">
-  <view style="font-size:20pt; color:#aaaaaa;margin-left:10%" >{{phonenumber}}</view>
-  <view class="classname" style="width:30%"></view>
-  <image src="../../image/user.png" style="width:32px; height:32px;margin-right:10%"></image>
+  <view style="font-size:20pt; color:#aaaaaa;margin-left:5%" >{{phonenumber}}</view>
+  <view class="classname" style="margin-right:5%;width:30%"></view>
+  <image src="../../image/user.png" style="width:32px; height:32px;margin-right:5%"></image>
   </view>
 
   <view class="chargeinfo">
-  <view class="classname" style="background:#aaaaaa; width:90%; height:1px;margin-left:10%;margin-right:10%"></view>
+  <view class="classname" style="background:#aaaaaa; width:90%; height:1px;margin-left:5%;margin-right:5%"></view>
   </view>
 
     <view class="motto50px"></view>
 
-    <view class="chargelabel" style="margin-left:10%">选择充值金额：</view>
+    <view class="chargelabel" style="margin-left:5%">选择充值金额：</view>
     <view class="motto50px"></view>
     <view class="chargeinfo">
-      <button bindtap="chargeMinus">-</button>
-      <view ><label >{{chargeMoney}}</label></view>
-      <button bindtap="chargeAdd">+</button>    
+      <view style=" margin-left:20%">
+      <image bindtap="chargeMinus" style="height:45px; width:45px;margin-top:4px"src="../../image/minus.png" />
+      </view>
+      <view src="../../image/chargebg.png" style="background:#eff3f2;height:45px; width:50%;text-align:center;line-height:50px;color:#da5c5d">{{money}}</view>
+      <view style=" margin-right:20%">
+      <image bindtap="chargeAdd" style="height:45px; width:45px;margin-top:4px"src="../../image/add.png"/>
+      </view>
     </view>
-    <view class="motto50px"></view>
+    <view class="motto100px"></view>
     <view class="chargebutt">
     <button class="charge_butt" style="background:#6ACC77;color:white" bindtap="chargesubmit">确定</button>
     </view>

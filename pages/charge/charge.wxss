@@ -14,11 +14,11 @@ motto10px {
   margin-top: 10px;
 }
 
-charge_label {
-
+.motto100px {
+  margin-top: 50px;
 }
 
 .charge_butt{  
   font-size:12pt;
-  width:80%;
+  width:90%;
 }
