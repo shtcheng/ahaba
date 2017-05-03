@@ -6,9 +6,10 @@
 }
 
 .userinfo-avatar {
-  width: 256rpx;
-  height: 256rpx;
-  margin: 10rpx;
+  width: 128rpx;
+  height: 128rpx;
+  margin-left: 50rpx;
+  margin-top: 50rpx;
   border-radius: 50%;
 }
 
@@ -37,3 +38,37 @@
   align-items: left;  
 }
 
+
+
+
+
+.user_view_for{
+    margin:5px;
+    width:98%;
+    margin-left: 3px; 
+}
+
+.user_view_price{
+    margin: 30px;
+    margin-left:3px;
+    color:white;
+    font-size:17pt;
+}
+.user_view_info_name{
+    margin: 15px;
+    margin-left:3px;
+    font-size:13pt;
+    color:white;
+}
+.user_view_info_time{
+    margin: 10px;
+    font-size:12pt;
+    color:white;
+}
+
+.user_view_info_add{
+    width:30px;
+    height:30px;
+    margin: 30px;
+    margin-left:0px;
+}

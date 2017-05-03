@@ -10,11 +10,13 @@
     margin: 10px;
     font-size:18pt;
     margin-left: 40%; 
-    width:75%; 
+    width:75%;
+    margin-top:25px;
+    align-items:center;
 }
 .index_view_user_user{
-    width:45px;
-    height:40px;  
+    width:25%;
+    width: 64px; height: 64px; border-radius: 50%;
 }
 
 .index_view_for{

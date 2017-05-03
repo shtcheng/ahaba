@@ -1,75 +1,67 @@
 
 <!--account.wxml-->
-<view class="page-section">
-  <view bindtap="bindViewTap" class="userinfo">
-    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-  <view class="usermotto2"></view>
-    <text class="userinfo-phonenumber">{{phoneNumber}} </text>
-  </view>
 
-  <view class="usermotto">
-    <text class="user-motto"></text>
-  </view>
-
-    <view class="chargeinfo">
-      <label >我的余额：</label><label class="yue"> 0.00 元</label>
-      <button bindtap="chargeTap">充值</button>    
-    </view>
+<!--账户信息-->
+<view style="background:#f7f7f7;display:flex; height:120px">
+  <!--头像图片-->
+  <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+  <view style="display:row; ">
+    <!--手机号-->
+    <view style="margin-top:35px;"><text class="userinfo-phonenumber" style="margin-left:25px;font-color:#737373">{{phoneNumber}} </text></view>
+    <!--余额信息-->
+    <view style="margin-top:15px;"><label style="margin-left:25px;font-color:#737373">我的余额：</label><label class="yue"> 0.00 元</label></view>   </view>
 </view>
 
 
-  <view class="usermotto">
-    <text class="user-motto"></text>
+  <!--充值按钮-->
+  <view style="margin-top:15px；"/>
+  <view style="display:flex;width:90%;align-items:center;margin-left:5%">
+    <button bindtap="chargeTap" style="background:#5d9cec;width:100%;text-align:center;color:white;">去充值</button>    
   </view>
+  <view style="margin-top:15px"/>
 
- <view>
+<!--门票购买历史-->
+ <view style="width:95%;align-items:center;">
 
-<view class="section__title">我买过的票：</view>
-  <scroll-view scroll-y="true" style="height: 300px;" 
-  bindscrolltoupper="upper" bindscrolltolower="lower" 
-  bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
-    <view id="green" class="scroll-view-item bc_green">1111</view>
-    <view id="red"  class="scroll-view-item bc_red">2222</view>
-    <view id="yellow" class="scroll-view-item bc_yellow">3333</view>
-    <view id="blue" class="scroll-view-item bc_blue">4444</view>
-    <view id="green" class="scroll-view-item bc_green">1111</view>
-    <view id="red"  class="scroll-view-item bc_red">2222</view>
-    <view id="yellow" class="scroll-view-item bc_yellow">3333</view>
-    <view id="blue" class="scroll-view-item bc_blue">4444</view>
-    <view id="green" class="scroll-view-item bc_green">1111</view>
-    <view id="red"  class="scroll-view-item bc_red">2222</view>
-    <view id="yellow" class="scroll-view-item bc_yellow">3333</view>
-    <view id="blue" class="scroll-view-item bc_blue">4444</view>
-    <view id="green" class="scroll-view-item bc_green">1111</view>
-    <view id="red"  class="scroll-view-item bc_red">2222</view>
-    <view id="yellow" class="scroll-view-item bc_yellow">3333</view>
-    <view id="blue" class="scroll-view-item bc_blue">4444</view>
-    <view id="green" class="scroll-view-item bc_green">1111</view>
-    <view id="red"  class="scroll-view-item bc_red">2222</view>
-    <view id="yellow" class="scroll-view-item bc_yellow">3333</view>
-    <view id="blue" class="scroll-view-item bc_blue">4444</view>
-    <view id="green" class="scroll-view-item bc_green">1111</view>
-    <view id="red"  class="scroll-view-item bc_red">2222</view>
-    <view id="yellow" class="scroll-view-item bc_yellow">3333</view>
-    <view id="blue" class="scroll-view-item bc_blue">4444</view>
-    <view id="green" class="scroll-view-item bc_green">1111</view>
-    <view id="red"  class="scroll-view-item bc_red">2222</view>
-    <view id="yellow" class="scroll-view-item bc_yellow">3333</view>
-    <view id="blue" class="scroll-view-item bc_blue">4444</view>
-    <view id="green" class="scroll-view-item bc_green">1111</view>
-    <view id="red"  class="scroll-view-item bc_red">2222</view>
-    <view id="yellow" class="scroll-view-item bc_yellow">3333</view>
-    <view id="blue" class="scroll-view-item bc_blue">4444</view>
-  </scroll-view>
+<view >我的门票</view>
 
+<view style="margin-top:10px"/>
 
-<view class="btn-area">
-    <button size="mini" bindtap="tap">click me to scroll into view </button>
-    <button size="mini" bindtap="tapMove">click me to scroll</button>
+<view style="background:#49d1ad;display: flex; width=60%; height:85px;border-radius:8px;">
+
+<image src="../../image/notice.png" style="margin-left:10px;margin-top:10px;width:60px;height:60px"></image>
+  <view style="display: cloumn; width=40%; height:85px">
+    
+    <!--项目名称-->
+    <view style="margin-top:20px;margin-left:20px;font-size:12pt">泸州游乐园：水上世界</view>
+    <!--时间-->
+    <view style="margin-top:15px;margin-left:20px;font-size:10pt">2017-04-04</view>
   </view>
+  <!--类别-->
+  <view style="margin-top:30px;margin-left:10px;font-size:12pt">成人票</view>
+  <!--价格-->
+  <view style="margin-top:30px;margin-left:10px;font-size:12pt">¥80.00</view>
+</view>
 
+  <!--购买历史-->  
+  <view wx:for="{{buytickets}}" wx:for-item="ticket" class="user_view_for">
+    <view style="display: flex; width=100%; height:85px">
+       <!--价格-->
+       <view style="background:{{ticket.colorPrice}}; height:100%;width:20%">
+        <view class="user_view_price">￥{{ticket.money}} money</view>
+      </view>
+      <!--名称-->
+      <view style="background:{{ticket.colorInfo}};height:100%;width:70%">
+        <view class="user_view_info_name">{{ticket.name}}name ({{ticket.type}})type </view>
+        <view class="user_view_info_time">{{ticket.bgTime}}至{{ticket.endTime}}</view>
+      </view>
+      <!--增加-->
+      <view style="background:{{ticket.colorAdd}};height:100%;width:10%">
+        <image id="{{ticket.id}}"  src="../../image/add_tick.png" class="user_view_info_add"/>
+      </view>
+    </view>    
+  </view>
 
 
 
 </view>
-

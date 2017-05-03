@@ -11,20 +11,22 @@
   <view class="classname" style="background:#aaaaaa; width:90%; height:1px;margin-left:5%;margin-right:5%"></view>
   </view>
 
-    <view class="motto50px"></view>
+    <view style="margin-top: 20px;"></view>
 
     <view class="chargelabel" style="margin-left:5%">选择充值金额：</view>
-    <view class="motto50px"></view>
+    <view style="margin-top: 20px;"/>
     <view class="chargeinfo">
+      <!--减号➖按钮-->
       <view style=" margin-left:20%">
       <image bindtap="chargeMinus" style="height:45px; width:45px;margin-top:4px"src="../../image/minus.png" />
       </view>
       <view src="../../image/chargebg.png" style="background:#eff3f2;height:45px; width:50%;text-align:center;line-height:50px;color:#da5c5d">{{money}}</view>
+      <!--加号➕按钮-->
       <view style=" margin-right:20%">
       <image bindtap="chargeAdd" style="height:45px; width:45px;margin-top:4px"src="../../image/add.png"/>
       </view>
     </view>
-    <view class="motto100px"></view>
+    <view style="margin-top: 50px;"/>
     <view class="chargebutt">
     <button class="charge_butt" style="background:#6ACC77;color:white" bindtap="chargesubmit">确定</button>
     </view>

@@ -9,7 +9,9 @@
     </picker>
     -->
     <view class="index_view_user_time">{{nowDate}}</view>
-    <image src="../../image/user.png" class="index_view_user_user" bindtap="goToUserCenter"/>
+    <view style="align:right">
+      <image src="{{userInfo.avatarUrl}}" background-size="cover"  class="index_view_user_user" bindtap="goToUserCenter"/>
+    </view>
   </view>
 
   <!--商品列表-->  
