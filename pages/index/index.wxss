@@ -13,8 +13,8 @@
     width:75%; 
 }
 .index_view_user_user{
-    width:25%;
-    height:51px;  
+    width:45px;
+    height:40px;  
 }
 
 .index_view_for{
