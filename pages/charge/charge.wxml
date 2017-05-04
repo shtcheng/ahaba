@@ -2,7 +2,7 @@
 <!--account.wxml-->
 <view style="margin-top: 30px">
   <view class="chargeinfo">
-  <view style="font-size:16pt; color:#aaaaaa;margin-left:5%;width:80%" >{{phonenumber}}</view>
+  <view style="font-size:16pt; color:#aaaaaa;margin-left:10%;width:80%" >{{phonenumber}}</view>
   <view style="width:20%"></view>
   <image src="../../image/user.png" style="width:32px; height:32px;"></image>
   </view>

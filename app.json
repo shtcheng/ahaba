@@ -12,9 +12,9 @@
   ],
   "window":{
     "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
+    "navigationBarBackgroundColor": "#38404a",
     "navigationBarTitleText": "云乐园",
-    "navigationBarTextStyle":"black",
+    "navigationBarTextStyle":"white",
     "enableDebug":"true",
     "enablePullDownRefresh": "true"
   }  
