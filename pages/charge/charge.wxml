@@ -20,7 +20,7 @@
       <view style=" margin-left:20%">
       <image bindtap="chargeMinus" style="height:45px; width:45px;margin-top:4px"src="../../image/minus.png" />
       </view>
-      <view src="../../image/chargebg.png" style="background:#eff3f2;height:45px; width:50%;text-align:center;line-height:50px;color:#da5c5d">{{money}}</view>
+      <view style="background:#eff3f2;height:45px; width:50%;text-align:center;line-height:50px;color:#da5c5d;font-size:20pt">{{money}}</view>
       <!--加号➕按钮-->
       <view style=" margin-right:20%">
       <image bindtap="chargeAdd" style="height:45px; width:45px;margin-top:4px"src="../../image/add.png"/>

@@ -7,9 +7,9 @@
   <image class="userinfo-avatar" src="../../image/user3.png" background-size="cover"></image>
   <view style="display:row; ">
     <!--手机号-->
-    <view style="margin-top:35px;"><text class="userinfo-phonenumber" style="margin-left:25px;font-color:#737373">{{phoneNumber}} </text></view>
+    <view style="margin-top:25px;"><text style="margin-left:25px;color:#737373;font-size:12pt">{{phoneNumber}} </text></view>
     <!--余额信息-->
-    <view style="margin-top:15px;"><label style="margin-left:25px;font-color:#737373;font-size:12pt">我的余额：</label><label style="font-color:#737373;font-size:12pt"> 0.00 元</label></view>   
+    <view style="margin-top:10px;"><label style="margin-left:25px;color:#737373;font-size:10pt">我的余额：</label><label style="color:#737373;font-size:10pt"> 0.00 元</label></view>   
     </view>
 </view>
 
