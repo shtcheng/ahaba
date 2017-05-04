@@ -19,7 +19,7 @@
   <view style="display:flex;width:90%;align-items:center;margin-left:5%;margin-top:20px">
     <button bindtap="chargeTap" style="background:#5d9cec;width:100%;text-align:center;color:white;">去充值</button>    
   </view>
-  <view style="margin-top:15px"/>
+  <view style="margin-top:30px"/>
 
 <!--门票购买历史-->
  <view style="width:98%;align-items:center;margin-left:1%">
@@ -28,20 +28,20 @@
 
 <view style="margin-top:10px"/>
 
-<view style="background:#49d1ad;display: flex; width=60%; height:85px;border-radius:8px;">
+<view style="background:#49d1ad;display: flex; width=60%; height:65px;border-radius:4px;">
 
-<image src="../../image/ticket.png" style="margin-top:10px;width:80px;height:60px"></image>
-  <view style="display: cloumn; width=40%; height:85px">
+<image src="../../image/ticket.png" style="margin-top:10px;width:60px;height:40px"></image>
+  <view style="display: cloumn; width=50%; height:85px">
     
     <!--项目名称-->
-    <view style="margin-top:20px;margin-left:1px;font-size:12pt;color:white">泸州游乐园：水上世界</view>
+    <view style="margin-top:8px;margin-left:10px;font-size:11pt;color:white">泸州游乐园：水上世界</view>
     <!--时间-->
-    <view style="margin-top:15px;margin-left:1px;font-size:10pt;color:gray">2017-04-04</view>
+    <view style="margin-top:8px;margin-left:10px;font-size:9pt;color:gray">2017-04-04</view>
   </view>
   <!--类别-->
-  <view style="margin-top:35px;margin-left:20px;font-size:12pt;color:white">成人票</view>
+  <view style="width:15%;margin-top:20px;margin-left:20px;font-size:11pt;color:white">成人票</view>
   <!--价格-->
-  <view style="margin-top:35px;margin-left:15px;font-size:12pt;color:white">¥80.00</view>
+  <view style="width:15%;margin-top:20px;margin-left:15px;font-size:11pt;color:white">¥80.00</view>
 </view>
 
   <!--购买历史-->  
