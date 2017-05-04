@@ -2,13 +2,13 @@
 <!--account.wxml-->
 <view class="content">
   <view class="chargeinfo">
-  <view style="font-size:20pt; color:#aaaaaa;margin-left:5%" >{{phonenumber}}</view>
-  <view class="classname" style="margin-right:5%;width:30%"></view>
+  <view style="font-size:16pt; color:#aaaaaa;margin-left:5%" >{{phonenumber}}</view>
+  <view style="margin-right:5%;width:30%"></view>
   <image src="../../image/user.png" style="width:32px; height:32px;margin-right:5%"></image>
   </view>
 
   <view class="chargeinfo">
-  <view class="classname" style="background:#aaaaaa; width:90%; height:1px;margin-left:5%;margin-right:5%"></view>
+  <view style="background:#aaaaaa; width:90%; height:1px;margin-left:5%;margin-right:5%"></view>
   </view>
 
     <view style="margin-top: 20px;"></view>
@@ -26,9 +26,9 @@
       <image bindtap="chargeAdd" style="height:45px; width:45px;margin-top:4px"src="../../image/add.png"/>
       </view>
     </view>
-    <view style="margin-top: 50px;"/>
-    <view class="chargebutt">
-    <button class="charge_butt" style="background:#6ACC77;color:white" bindtap="chargesubmit">确定</button>
+    
+    <view style="width: 100%;margin:0 auto;bottom:80rpx;position:fixed; ">
+    <button class="charge_butt" style="background:#5d9cec;color:white" bindtap="chargesubmit">确定</button>
     </view>
 
 </view>

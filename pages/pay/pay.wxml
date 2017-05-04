@@ -34,6 +34,6 @@
 </view>
 
 <view style="height:50px;visibility:hidden"></view>
-<view style="width: 100%;margin:0 auto;bottom:0rpx;position:fixed; ">
+<view style="width: 100%;margin:0 auto;bottom:80rpx;position:fixed; ">
  <button bindtap="pay" style="width: 90%;background:#5D9CEC;border:none;border-radius: 0;" >确定</button>
 </view>

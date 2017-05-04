@@ -269,7 +269,6 @@ Page({
     that.data.buyDate = that.getNowDate()
     //动画显示
     that.setData({
-      userInfo:app.globalData.userInfo,
       hiddenFoorter: that.data.hiddenMyTick,
       nowDate:that.data.buyDate,
       startDate:that.data.buyDate

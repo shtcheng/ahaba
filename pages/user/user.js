@@ -4,7 +4,7 @@ var app = getApp()
 Page({
   data: {
     //motto: '你好，小程序！',
-    userInfo: {},
+//    userInfo: {},
     ticketsHistory:[],
     phoneNumber:13730842688
   },
@@ -28,7 +28,7 @@ Page({
     var that = this
       //更新数据
       that.setData({
-          userInfo:app.globalData.userInfo,
+//          userInfo:app.globalData.userInfo,
           phoneNumber:app.globalData.phone
       })
 

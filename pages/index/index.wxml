@@ -10,7 +10,7 @@
     -->
     <view class="index_view_user_time">{{nowDate}}</view>
     <view style="align:right">
-      <image src="{{userInfo.avatarUrl}}" background-size="cover"  class="index_view_user_user" bindtap="goToUserCenter"/>
+      <image src="../../image/user2.png" class="index_view_user_user" bindtap="goToUserCenter"/>
     </view>
   </view>
 

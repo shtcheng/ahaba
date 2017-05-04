@@ -7,16 +7,17 @@
     display: flex;
 }
 .index_view_user_time{
-    margin: 10px;
-    font-size:18pt;
+    margin: 5px;
+    font-size:14pt;
     margin-left: 40%; 
     width:75%;
-    margin-top:25px;
+    margin-top:10px;
     align-items:center;
 }
 .index_view_user_user{
     width:25%;
-    width: 64px; height: 64px; border-radius: 50%;
+    width: 40px; 
+    height: 40px; 
 }
 
 .index_view_for{

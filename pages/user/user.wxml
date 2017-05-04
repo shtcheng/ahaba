@@ -4,24 +4,25 @@
 <!--账户信息-->
 <view style="background:#f7f7f7;display:flex; height:120px">
   <!--头像图片-->
-  <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+  <image class="userinfo-avatar" src="../../image/user3.png" background-size="cover"></image>
   <view style="display:row; ">
     <!--手机号-->
     <view style="margin-top:35px;"><text class="userinfo-phonenumber" style="margin-left:25px;font-color:#737373">{{phoneNumber}} </text></view>
     <!--余额信息-->
-    <view style="margin-top:15px;"><label style="margin-left:25px;font-color:#737373">我的余额：</label><label class="yue"> 0.00 元</label></view>   </view>
+    <view style="margin-top:15px;"><label style="margin-left:25px;font-color:#737373;font-size:12pt">我的余额：</label><label style="font-color:#737373;font-size:12pt"> 0.00 元</label></view>   
+    </view>
 </view>
 
 
   <!--充值按钮-->
   <view style="margin-top:15px；"/>
-  <view style="display:flex;width:90%;align-items:center;margin-left:5%">
+  <view style="display:flex;width:90%;align-items:center;margin-left:5%;margin-top:20px">
     <button bindtap="chargeTap" style="background:#5d9cec;width:100%;text-align:center;color:white;">去充值</button>    
   </view>
   <view style="margin-top:15px"/>
 
 <!--门票购买历史-->
- <view style="width:95%;align-items:center;">
+ <view style="width:98%;align-items:center;margin-left:1%">
 
 <view >我的门票</view>
 
@@ -29,18 +30,18 @@
 
 <view style="background:#49d1ad;display: flex; width=60%; height:85px;border-radius:8px;">
 
-<image src="../../image/notice.png" style="margin-left:10px;margin-top:10px;width:60px;height:60px"></image>
+<image src="../../image/ticket.png" style="margin-top:10px;width:80px;height:60px"></image>
   <view style="display: cloumn; width=40%; height:85px">
     
     <!--项目名称-->
-    <view style="margin-top:20px;margin-left:20px;font-size:12pt">泸州游乐园：水上世界</view>
+    <view style="margin-top:20px;margin-left:1px;font-size:12pt;color:white">泸州游乐园：水上世界</view>
     <!--时间-->
-    <view style="margin-top:15px;margin-left:20px;font-size:10pt">2017-04-04</view>
+    <view style="margin-top:15px;margin-left:1px;font-size:10pt;color:gray">2017-04-04</view>
   </view>
   <!--类别-->
-  <view style="margin-top:30px;margin-left:10px;font-size:12pt">成人票</view>
+  <view style="margin-top:35px;margin-left:20px;font-size:12pt;color:white">成人票</view>
   <!--价格-->
-  <view style="margin-top:30px;margin-left:10px;font-size:12pt">¥80.00</view>
+  <view style="margin-top:35px;margin-left:15px;font-size:12pt;color:white">¥80.00</view>
 </view>
 
   <!--购买历史-->  
