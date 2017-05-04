@@ -2,7 +2,7 @@
 .chargeinfo {
   display: flex;
   flex-direction: row;
-  align-items: center;
+ width:90%
 }
 
 .motto50px {

@@ -1,29 +1,29 @@
 
 <!--account.wxml-->
-<view class="content">
+<view style="margin-top: 30px">
   <view class="chargeinfo">
-  <view style="font-size:16pt; color:#aaaaaa;margin-left:5%" >{{phonenumber}}</view>
-  <view style="margin-right:5%;width:30%"></view>
-  <image src="../../image/user.png" style="width:32px; height:32px;margin-right:5%"></image>
+  <view style="font-size:16pt; color:#aaaaaa;margin-left:5%;width:80%" >{{phonenumber}}</view>
+  <view style="width:20%"></view>
+  <image src="../../image/user.png" style="width:32px; height:32px;"></image>
   </view>
 
-  <view class="chargeinfo">
+  <view >
   <view style="background:#aaaaaa; width:90%; height:1px;margin-left:5%;margin-right:5%"></view>
   </view>
 
     <view style="margin-top: 20px;"></view>
 
-    <view class="chargelabel" style="margin-left:5%">选择充值金额：</view>
+    <view class="chargelabel" style="margin-left:5%;color:#525e6f">选择充值金额：</view>
     <view style="margin-top: 20px;"/>
     <view class="chargeinfo">
       <!--减号➖按钮-->
       <view style=" margin-left:20%">
-      <image bindtap="chargeMinus" style="height:45px; width:45px;margin-top:4px"src="../../image/minus.png" />
+      <image bindtap="chargeMinus" style="height:45px; width:45px;margin-top:0px"src="../../image/minus.png" />
       </view>
       <view style="background:#eff3f2;height:45px; width:50%;text-align:center;line-height:50px;color:#da5c5d;font-size:20pt">{{money}}</view>
       <!--加号➕按钮-->
       <view style=" margin-right:20%">
-      <image bindtap="chargeAdd" style="height:45px; width:45px;margin-top:4px"src="../../image/add.png"/>
+      <image bindtap="chargeAdd" style="height:45px; width:45px;margin-top:0px"src="../../image/add.png"/>
       </view>
     </view>
     
