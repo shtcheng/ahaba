@@ -108,6 +108,7 @@
 }
 .index_footer_pay{
     width:100%;
+    height: 55px;
     display: flex;    
 }
 .index_footer_pay_total{
@@ -121,13 +122,14 @@
     position:relative;
 }
 .index_footer_pay_total_img{
-    margin-top: 5px;
+    margin-top: 10px;
+    margin-left: 5px;
     width: 100%;
     height: 40px;
 }
 .index_footer_pay_total_price{
-    margin: 10px;
-    margin-left: 20px;
+    margin: 15px;
+    margin-left: 25px;
     width: 30%;
     color:white;
 }
@@ -154,4 +156,5 @@
     background:#6ACC77;
     border:none;
     border-radius: 0;
+    line-height:55px;
 }
