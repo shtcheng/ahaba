@@ -184,12 +184,14 @@ Page({
       data: {},
       method: 'GET',
       success: function(res){
+        res = res.data
         if (res.result <= 0) {
           console.log(res.message)
           return
         }
 
         var ticket = JSON.parse(res.data)
+        console.log(ticket)
         if (ticket.length == 0){
           that.data.hasMore = false
         }else{
@@ -237,29 +239,7 @@ Page({
 
   //初始化
   onLoad: function () {
-    var that = this
-    //测试数据
-    for(var i = 0; i < 5; i++){
-                      var tmp = {}
-                      tmp.tid = i + 1
-                      tmp.itemname = "水上世界"
-                      tmp.addr = "泸州游乐园"
-                      if (i %2 == 0){
-                        tmp.ticketname = "成人票"
-                      }else{
-                        tmp.ticketname = "儿童/老人票"
-                      }
-                      
-                      tmp.price = 80
-                      tmp.dt_open = "8:00"
-                      tmp.dt_close = "18:00"
-                      that.data.tickets.push(tmp) 
-                    }
-                    that.setColor(that.data.tickets)
-                    that.setData({
-                      ticketList:that.data.tickets,
-                    });
-
+    var that = this    
     var oldPackCode = wx.getStorageSync(app.globalData.storage_ParkCode)
     if (oldPackCode != app.globalData.parkcode){
       wx.setStorageSync(app.globalData.storage_ParkCode, app.globalData.parkcode)
