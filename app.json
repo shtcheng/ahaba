@@ -6,7 +6,6 @@
     "pages/pay/pay", 
     "pages/charge/charge",
     "pages/user/user",
-    "pages/verify/verify",
     "pages/proto/proto",
     "pages/logs/logs"
   ],
