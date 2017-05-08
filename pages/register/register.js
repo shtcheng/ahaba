@@ -78,7 +78,7 @@ Page({
             return
           }
 
-          that.data.check.phone=that.data.phone
+          that.data.check.phone=that.data.data
           that.data.check.code=res.data
         } 
      });     
@@ -178,7 +178,7 @@ Page({
       method: 'GET',
       success: function(res){
         if (res.result > 0){
-          var recvData = JSON.parse(res.data)
+          var recvData = JSON.parse(res.data.data)
           app.globalData.pAppKey = recvData.key
           console.log(app.globalData.pAppKey)
 
