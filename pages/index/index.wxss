@@ -31,7 +31,7 @@
     margin: 30px;
     margin-left:3px;
     color:white;
-    font-size:17pt;
+    font-size:16pt;
 }
 .index_view_info_name{
     margin: 15px;

@@ -18,11 +18,11 @@
   <view wx:for="{{ticketList}}" wx:for-item="ticket" wx:key="id" class="index_view_for">
     <view style="display: flex; width=100%; height:85px">
        <!--价格-->
-       <view style="background:{{ticket.colorPrice}}; height:100%;width:20%">
+       <view style="background:{{ticket.colorPrice}}; height:100%;width:30%">
         <view class="index_view_price">￥{{ticket.price}}</view>
       </view>
       <!--名称-->
-      <view style="background:{{ticket.colorInfo}};height:100%;width:70%">
+      <view style="background:{{ticket.colorInfo}};height:100%;width:60%">
         <view class="index_view_info_name">{{ticket.itemname}}({{ticket.ticketname}})</view>
         <view class="index_view_info_time">{{ticket.dt_open}}至{{ticket.dt_close}}</view>
       </view>

@@ -62,6 +62,7 @@ App({
   },
 
   globalData:{
+    mustLogin:false,
     appid:"wxb1e9f107aff08a66",
     secret:"0ccd7143b59b99ae3fa50aecab312763",
     rootUrl:"https://iland.cc",//服务器url

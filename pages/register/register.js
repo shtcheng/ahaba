@@ -49,11 +49,7 @@ Page({
   },
 
   //验证码输入
-  inputCode: function(e) {
-    if (isNaN(e.detail.value)){
-       return
-    }
-    
+  inputCode: function(e) {    
     var that = this  
     that.data.checkcode = e.detail.value
   },
@@ -68,39 +64,32 @@ Page({
 
     //获取验证码
     var token = sha1.hex_sha1("sendsms"+app.globalData.pAppKey+that.data.phone)
+    var strUrl = app.globalData.rootUrl + "/sendsms?token=" + token + "&mobile=" + that.data.phone
     wx.request({
-        url: app.globalData.rootUrl + "/sendsms?token="+token+"&mobile=" + that.data.phone,
+      url: strUrl,
         data: {},
         method: 'GET',
         success: function(res){
+          res = res.data
           if (res.result <= 0) {
             console.log(res.message)                    
             return
           }
 
-          that.data.check.phone=that.data.data
-          that.data.check.code=res.data
+          that.data.check.phone = that.data.phone
+          that.data.check.code = res.data
+          console.log("check code:" + that.data.check.code)
         } 
-     });     
+     });
   },  
 
   //提交
-  submit: function(){
-    //测试
+  submit: function(){    
     var that = this
-    app.globalData.phone = that.data.phone
-    wx.setStorageSync(app.globalData.storage_Phone, app.globalData.phone)
-    wx.redirectTo({
-            url: '../index/index',
-            success: function(res){}
-          })
-          return
-
-          
-    //var that = this
     if (that.data.checkcode.length == 0 || that.data.phone.length == 0){
       return
     }
+
     if(that.data.checkcode != that.data.check.code 
       || that.data.phone != that.data.check.phone){
         console.log("error check code.")
@@ -115,11 +104,7 @@ Page({
         data: {},
         method: 'GET',
         success: function(res){
-          console.log("注册或登陆")
-          console.log("注册或登陆")
-          console.log("注册或登陆")
-          console.log("注册或登陆")
-          console.log("注册或登陆")
+          res = res.data
           if (res.result < 0) {
             console.log(res.message)
             return
@@ -156,49 +141,25 @@ Page({
 
   onLoad: function () {
     var that = this
-    that.data.check.phone=""
-    that.data.check.code=""
     that.setData({
       disabledGetCode:true,
       disabledSubmit : that.data.checkBox,
       codeButtText:"获取"
     })
 
+    if (app.globalData.mustLogin){
+      wx.setStorageSync(app.globalData.storage_Phone, "")
+    }
 
-    //测试
     //获取号码缓存
-          app.globalData.phone = wx.getStorageSync(app.globalData.storage_Phone)
-          if (0 != app.globalData.phone.length){
-            wx.redirectTo({
-              url: '../index/index',
-              success: function(res){}
-            })
-          }
-          return
-
-    //获取pAppKey
-    wx.request({
-      url: app.globalData.rootUrl + "/appkey?appid="+app.globalData.pAppId,
-      data: {},
-      method: 'GET',
-      success: function(res){
-        if (res.result > 0){
-          var recvData = JSON.parse(res.data.data)
-          app.globalData.pAppKey = recvData.key
-          console.log(app.globalData.pAppKey)
-
-          //获取号码缓存
-          app.globalData.phone = wx.getStorageSync(app.globalData.storage_Phone)
-          if (0 != app.globalData.phone.length){
-            wx.redirectTo({
-              url: '../index/index',
-              success: function(res){}
-            })
-          }
-        }else{
-          console.log(res.message)
-        }
-      }
-    });  
+    app.globalData.phone = wx.getStorageSync(app.globalData.storage_Phone)
+    console.log(app.globalData.phone)
+    var phone = /^0?1[3|4|5|8][0-9]\d{8}$/;
+    if (phone.test(app.globalData.phone)) {
+      wx.redirectTo({
+        url: '../index/index',
+        success: function (res) { }
+      })
+    }  
   }
 })

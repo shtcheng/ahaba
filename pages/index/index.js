@@ -4,14 +4,6 @@ var sha1 = require('../../utils/sha1.js')
 var app = getApp();
 Page({
    data: {
-    page:0,
-    pnum:15,
-
-    userInfo: {},
-
-    loadingTicket: false,
-
-    hasMore:true,
     tickets:[],
 
     buyDate:"",
@@ -171,14 +163,10 @@ Page({
   //加载商品
   loadTicket : function(){
     var that = this
-    if (that.data.loadingTicket){
-      return
-    }    
-
     wx.showLoading({
     })
 
-    var strUrl = app.globalData.rootUrl +  "/getdata?query=item&parkcode=" + app.globalData.parkcode
+    var strUrl = app.globalData.rootUrl +  "/getdata?query=ticket&parkcode=" + app.globalData.parkcode
     wx.request({
       url: strUrl,
       data: {},
@@ -191,43 +179,27 @@ Page({
         }
 
         var ticket = JSON.parse(res.data)
-        console.log(ticket)
-        if (ticket.length == 0){
-          that.data.hasMore = false
-        }else{
-          that.data.hasMore = false 
-          that.data.tickets.concat(ticket)
-          that.setColor(that.data.tickets)        
-          that.setData({
-            ticketList : that.data.tickets,
-          });
-        }
-      },
-      fail: function() {
-        that.data.page--
+        that.data.tickets = ticket
+        that.setColor(that.data.tickets)        
+        that.setData({
+          ticketList : that.data.tickets,            
+        });
+        console.log(that.data.tickets)
       },
       complete: function() {
         wx.hideLoading()
-        that.data.loadingTicket = false
       }
     });
   },
   //加载更多
   onReachBottom: function() {
       return
-      var that = this
-      if (!that.data.hasMore) 
-        return
-      that.loadTicket()
   },
   //刷新处理
   onPullDownRefresh: function(e) {
       var that = this
       //数据重置
-      that.data.page = 0
       that.data.tickets = []
-      that.data.hasMore = true
-
       that.loadTicket()
   },
 
