@@ -10,8 +10,19 @@ Page({
     totalPrice:0,
   },
 
+  sleep: function (numberMillis){
+    var now = new Date()
+    var exitTime = now.getTime() + numberMillis
+    while (true) {
+      now = new Date()
+      if (now.getTime() > exitTime)
+        return;
+    }
+  },
   tradeinfo_pay: function (orderId) {
     var that = this
+    var d = new Date()
+    var nowDate = d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate() + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds()
     var token = sha1.hex_sha1(orderId + app.globalData.pAppKey + app.globalData.phone)
     var strUrl = app.globalData.rootUrl + "/tradeinfo?cmd=pay&token=" + token + "&mobile=" + app.globalData.phone
     wx.request({
@@ -19,7 +30,7 @@ Page({
       data: {
         orderid: orderId,
         amount: that.data.totalPrice,
-        dt_pay: Date.parse(new Date()),
+        dt_pay: nowDate,
         paycontent: "购游乐票" + that.data.totalNum+"张"
       },
       method: 'POST',
@@ -34,11 +45,9 @@ Page({
           title: '购买成功',
           icon: 'success',
           duration: 1500,
-          success: function (res){
-            wx.navigateTo({
-              url: '../index/index',
-              success: function (res) { }
-            })
+          complete:function(res){
+            that.sleep(1500)
+            wx.navigateBack()
           }
         })
 
