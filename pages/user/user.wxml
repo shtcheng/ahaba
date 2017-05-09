@@ -9,7 +9,7 @@
     <!--手机号-->
     <view style="margin-top:25px;"><text style="margin-left:25px;color:#737373;font-size:12pt">{{phoneNumber}} </text></view>
     <!--余额信息-->
-    <view style="margin-top:10px;"><label style="margin-left:25px;color:#737373;font-size:10pt">我的余额：</label><label style="color:#737373;font-size:10pt"> 0.00 元</label></view>   
+    <view style="margin-top:10px;margin-left:25px;color:#737373;font-size:10pt">我的余额： {{hasMoney}}  元</view>   
     </view>
 </view>
 
@@ -44,21 +44,23 @@
   <view style="width:15%;margin-top:20px;margin-left:15px;font-size:11pt;color:white">¥80.00</view>
 </view>
 
-  <!--购买历史-->  
-  <view wx:for="{{buytickets}}" wx:for-item="ticket" class="user_view_for">
+
+
+  <!--商品列表-->  
+  <view wx:for="{{history}}" wx:for-item="ticket" wx:key="id" class="index_view_for">
     <view style="display: flex; width=100%; height:85px">
        <!--价格-->
        <view style="background:{{ticket.colorPrice}}; height:100%;width:20%">
-        <view class="user_view_price">￥{{ticket.money}} money</view>
+        <view class="index_view_price">￥{{ticket.price}}</view>
       </view>
       <!--名称-->
       <view style="background:{{ticket.colorInfo}};height:100%;width:70%">
-        <view class="user_view_info_name">{{ticket.name}}name ({{ticket.type}})type </view>
-        <view class="user_view_info_time">{{ticket.bgTime}}至{{ticket.endTime}}</view>
+        <view class="index_view_info_name">{{ticket.itemname}}({{ticket.ticketname}})</view>
+        <view class="index_view_info_time">{{ticket.dt_open}}至{{ticket.dt_close}}</view>
       </view>
       <!--增加-->
       <view style="background:{{ticket.colorAdd}};height:100%;width:10%">
-        <image id="{{ticket.id}}"  src="../../image/add_tick.png" class="user_view_info_add"/>
+        <image id="{{ticket.tid}}"  bindtap="addNum" src="../../image/add_tick.png" class="index_view_info_add"/>
       </view>
     </view>    
   </view>

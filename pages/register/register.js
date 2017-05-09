@@ -115,6 +115,11 @@ Page({
         data: {},
         method: 'GET',
         success: function(res){
+          console.log("注册或登陆")
+          console.log("注册或登陆")
+          console.log("注册或登陆")
+          console.log("注册或登陆")
+          console.log("注册或登陆")
           if (res.result < 0) {
             console.log(res.message)
             return

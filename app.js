@@ -1,6 +1,7 @@
 //app.js
 App({
   onLaunch: function () {
+    console.log("App onLaunch") 
     var that = this
 
     //微信登陆
@@ -39,18 +40,23 @@ App({
             var d = JSON.parse(res.data.data);
             that.globalData.pAppKey = d.key;
             console.log(that.globalData.pAppKey);
-          },
-
-          fail:function(res) {
-            console.log("appkey fail");
-
-          },
-          complete:function(res) {
-            console.log("appkey complete");
-
           }
         });
 
+        // 游乐园信息
+        var strUrl3 = that.globalData.rootUrl + '/getdata?query=park';
+        wx.request({
+          url: strUrl3,
+          data: {},
+          method: 'GET',
+          success: function (res) {
+            console.log("get park list success");
+            console.log(res)
+            that.globalData.pParks = JSON.parse(res.data.data);
+            console.log("park list");
+            console.log(that.globalData.pParks);
+          }
+        });
       }
     });
   },
@@ -71,5 +77,7 @@ App({
     pAppId:"cpp.7f0ef3584bd58f14891ca3646378",//用户平台appid
     pAppKey:"",//用户平台app key 
     pUserInfo:null,//用户平台信息
+    pHasMoney:null,//用户账户余额
+    pParks:[],//游乐园列表
   }
 })

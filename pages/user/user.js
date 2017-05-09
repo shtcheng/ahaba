@@ -1,12 +1,12 @@
 //user.js
 //获取应用实例
+var sha1 = require('../../utils/sha1.js')
 var app = getApp()
 Page({
   data: {
-    //motto: '你好，小程序！',
-//    userInfo: {},
-    ticketsHistory:[],
-    phoneNumber:13730842688
+    phoneNumber:13982196214,
+    hasMoney:0,
+    history:[]
   },
   //事件处理函数
   bindViewTap: function() {
@@ -22,37 +22,47 @@ Page({
     })
   },
 
-
   onLoad: function () {
     console.log('onLoad')
-    var that = this
-      //更新数据
-      that.setData({
-//          userInfo:app.globalData.userInfo,
-          phoneNumber:app.globalData.phone
-      })
+    var that = this;
 
-                    for(var i = 0; i < 5; i++){
-                      var tmp = {}
-                      tmp.id = i + 1
-                      tmp.name = "水上世界"
-                      tmp.addr = "泸州游乐园"
-                      if (i %2 == 0){
-                        tmp.type = "成人票"
-                      }else{
-                        tmp.type = "儿童/老人票"
-                      }
-                      
-                      tmp.money = 80
-                      tmp.bgTime = "8:00"
-                      tmp.endTime = "18:00"
-                      that.data.ticketsHistory.push(tmp) 
-                    }
-                    that.setColor(that.data.ticketsHistory)
-                    that.setData({
-                      buytickets:that.data.ticketsHistory,
-                    });
-                    console.log(that.data.ticketsHistory)
+    //获取账户信息
+    var token2 = sha1.hex_sha1("account" + app.globalData.pAppKey + app.globalData.phone)
+    var strUrl2 = app.globalData.rootUrl + '/account?token=' + token2 + '&mobile=' + app.globalData.phone;
+    console.log("get account info");
+    console.log(strUrl2);
+    wx.request({
+      url: strUrl2,
+      data: {},
+      method: 'GET',
+      success: function (res) {
+        if (res.data.result <= 0) {
+          wx.showToast({
+            title: '获取用户信息失败，请稍后再试！',
+            image: '../../image/info.png',
+            duration: 3000
+          })
+          return;
+        }
 
+        var d = JSON.parse(res.data.data);
+        app.globalData.pHasMoney = d.hasmoney;
+        that.setData({
+          phoneNumber:app.globalData.phone,
+          hasMoney: app.globalData.pHasMoney
+        })
+      },
+
+      fail:function(res) {
+        if (res.data.result <= 0) {
+          wx.showToast({
+            title: '获取账号信息失败，请稍后再试！',
+            image: '../../image/info.png',
+            duration: 3000
+          })
+          return;
+        }
+      }
+    });
   }
 })
