@@ -115,7 +115,7 @@ Page({
           
           //返回首页
           wx.redirectTo({
-            url: '../index/index',
+            url: '../zhuye/zhuye',
             success: function(res){}
           })
         }
@@ -157,7 +157,7 @@ Page({
     var phone = /^0?1[3|4|5|8][0-9]\d{8}$/;
     if (phone.test(app.globalData.phone)) {
       wx.redirectTo({
-        url: '../index/index',
+        url: '../zhuye/zhuye',
         success: function (res) { }
       })
     }  

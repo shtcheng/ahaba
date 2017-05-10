@@ -8,6 +8,7 @@ App({
     wx.login({
       success: function(res){
         //用户信息
+        that.globalData.logincode=res.code;
         wx.getUserInfo({
           success: function (res) {
             that.globalData.userInfo = res.userInfo;
@@ -68,6 +69,7 @@ App({
     rootUrl:"https://iland.cc",//服务器url
     userInfo:null,//用户微信信息 
     openid:"",
+    logincode:null,
 
     storage_Phone : "phone",
     storage_MyTicket : "myTicket",
