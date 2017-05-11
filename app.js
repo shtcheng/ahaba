@@ -75,7 +75,8 @@ App({
     storage_MyTicket : "myTicket",
     storage_ParkCode : "parkcode",
 
-    parkcode: "0001",//游乐场
+    parkcode: "0001",//游乐场编号
+    itemcode:"0001",//游乐项目编号
     phone:"",//手机号
     pAppId:"cpp.7f0ef3584bd58f14891ca3646378",//用户平台appid
     pAppKey:"",//用户平台app key 

@@ -24,15 +24,17 @@ Page({
     })
   },
 
-  //扫描二维码
+  //扫描二维码，获取游乐园信息编码及通道编码
   scanqrcode: function () {
 
     wx.scanCode({
       success: (res) => {
         console.log("扫描二维码 success")
         console.log(res)
-        var str = res.result.substring(0, app.globalData.rootUrl.length);
+        var prex = app.globalData.rootUrl +"/qrcode?";
+        var str = res.result.substring(0, prex);
         if (str == app.globalData.rootUrl) {
+          str = res.result.substring()
           wx.navigateTo({
             url: '../index/index'
           })
@@ -54,7 +56,5 @@ Page({
 
       }
     })
-  },
-
-  
+  },  
 })
