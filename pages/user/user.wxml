@@ -28,7 +28,9 @@
 
 <view style="margin-top:10px"/>
 
-<view style="background:#49d1ad;display: flex; width=60%; height:65px;border-radius:4px;">
+
+
+<view style="background:#aaaaaa;display: flex; width=60%; height:65px;border-radius:4px;">
 
 <image src="../../image/ticket.png" style="margin-top:10px;width:60px;height:40px"></image>
   <view style="display: cloumn; width=50%; height:85px">
@@ -46,25 +48,34 @@
 
 
 
-  <!--商品列表-->  
-  <view wx:for="{{history}}" wx:for-item="ticket" wx:key="id" class="index_view_for">
-    <view style="display: flex; width=100%; height:85px">
-       <!--价格-->
-       <view style="background:{{ticket.colorPrice}}; height:100%;width:20%">
-        <view class="index_view_price">￥{{ticket.price}}</view>
-      </view>
-      <!--名称-->
-      <view style="background:{{ticket.colorInfo}};height:100%;width:70%">
-        <view class="index_view_info_name">{{ticket.itemname}}({{ticket.ticketname}})</view>
-        <view class="index_view_info_time">{{ticket.dt_open}}至{{ticket.dt_close}}</view>
-      </view>
-      <!--增加-->
-      <view style="background:{{ticket.colorAdd}};height:100%;width:10%">
-        <image id="{{ticket.tid}}"  bindtap="addNum" src="../../image/add_tick.png" class="index_view_info_add"/>
-      </view>
-    </view>    
+
+
+
+
+
+
+
+
+  <!--购票历史-->  
+  <view wx:for="{{history}}" wx:for-item="ticket" wx:key="tid" >
+
+<view style="margin-top:10px"/>
+<view style="background:#49d1ad;display: flex; width=60%; height:65px;border-radius:4px;">
+
+<image src="../../image/ticket.png" style="margin-top:10px;width:60px;height:40px"></image>
+  <view style="display: cloumn; width=50%; height:85px">
+    
+    <!--项目名称-->
+    <view style="margin-top:8px;margin-left:10px;font-size:11pt;color:white">{{ticket.parkname}}</view>
+    <!--时间-->
+    <view style="margin-top:8px;margin-left:10px;font-size:9pt;color:gray">{{ticket.dt_pay}}</view>
   </view>
-
-
-
+  <!--类别-->
+  <view style="width:15%;margin-top:20px;margin-left:20px;font-size:11pt;color:white">{{ticket.tickettype}}</view>
+  <!--价格-->
+  <view style="width:15%;margin-top:20px;margin-left:15px;font-size:11pt;color:white">{{ticket.amount}}</view>
+</view>
+  
+  
+  </view>
 </view>

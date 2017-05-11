@@ -27,51 +27,13 @@ Page({
     console.log('onLoad')
     var that = this;
 
-    //获取账户信息
-    var token2 = sha1.hex_sha1("account" + app.globalData.pAppKey + app.globalData.phone)
-    var strUrl2 = app.globalData.rootUrl + '/account?token=' + token2 + '&mobile=' + app.globalData.phone;
-    console.log("get account info");
-    console.log(strUrl2);
-    wx.request({
-      url: strUrl2,
-      data: {},
-      method: 'GET',
-      success: function (res) {
-        if (res.data.result <= 0) {
-          wx.showToast({
-            title: '获取用户信息失败，请稍后再试！',
-            image: '../../image/info.png',
-            duration: 3000
-          })
-          return;
-        }
-
-        var d = JSON.parse(res.data.data);
-        app.globalData.pHasMoney = d.hasmoney;
-        that.setData({
-          phoneNumber:app.globalData.phone,
-          hasMoney: app.globalData.pHasMoney
-        })
-      },
-
-      fail:function(res) {
-        if (res.data.result <= 0) {
-          wx.showToast({
-            title: '获取账号信息失败，请稍后再试！',
-            image: '../../image/info.png',
-            duration: 3000
-          })
-          return;
-        }
-      }
-    });
-
     that.loadAccountInfo();
     that.loadHistory();
   },
 
   //获取账户信息
   loadAccountInfo:function() {
+    var that = this;
     var token2 = sha1.hex_sha1("account" + app.globalData.pAppKey + app.globalData.phone)
     var strUrl2 = app.globalData.rootUrl + '/account?token=' + token2 + '&mobile=' + app.globalData.phone;
     console.log("get account info");
@@ -115,8 +77,6 @@ Page({
   //加载商品
   loadHistory: function () {
     var that = this
-    wx.showLoading({
-    })
 
     var strUrl = app.globalData.rootUrl + "/getdata?query=order&mobile=" + app.globalData.phone;
     console.log("历史购票信息")
@@ -127,10 +87,10 @@ Page({
       method: 'GET',
       success: function (res) {
         console.log("历史购票信息")
-        res = res.data.data
+        res = res.data
         console.log(res)
         if (res.result <= 0) {
-          console.log(res.message)
+          console.log(res)
 
           wx.showToast({
             title: '获取购票历史信息失败，请稍后再试！',
@@ -140,6 +100,15 @@ Page({
 
           return
         }
+
+        var ticket = JSON.parse(res.data)
+        that.data.history = ticket
+        that.setData({
+          history: that.data.history,
+        });
+        console.log(that.data.history)
+
+
 
         //        var ticket = JSON.parse(res.data)
         //        that.data.tickets = ticket
