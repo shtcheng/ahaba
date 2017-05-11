@@ -31,8 +31,8 @@ Page({
       success: (res) => {
         console.log("扫描二维码 success")
         console.log(res)
-        var prex = app.globalData.rootUrl +"/qrcode?";
-        var str = res.result.substring(0, prex);
+        var prex = app.globalData.rootUrl;// +"/qrcode?";
+        var str = res.result.substring(0, prex.length);
         if (str == app.globalData.rootUrl) {
           str = res.result.substring()
           wx.navigateTo({

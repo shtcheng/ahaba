@@ -65,6 +65,8 @@ Page({
     //获取验证码
     var token = sha1.hex_sha1("sendsms"+app.globalData.pAppKey+that.data.phone)
     var strUrl = app.globalData.rootUrl + "/sendsms?token=" + token + "&mobile=" + that.data.phone
+    console.log("获取验证码")
+    console.log(strUrl)
     wx.request({
       url: strUrl,
         data: {},
@@ -72,14 +74,27 @@ Page({
         success: function(res){
           res = res.data
           if (res.result <= 0) {
-            console.log(res.message)                    
+            console.log(res)                    
+            wx.showToast({
+              title: '获取验证码失败，请稍后重试！',
+              image: '../../image/info.png',
+              duration: 3000
+            })
             return
           }
 
           that.data.check.phone = that.data.phone
           that.data.check.code = res.data
           console.log("check code:" + that.data.check.code)
-        } 
+        },
+        fail:function(res) {
+          console.log(res)
+          wx.showToast({
+            title: '获取验证码失败，请稍后重试！',
+            image: '../../image/info.png',
+            duration: 3000
+          })
+        }
      });
   },  
 
@@ -106,7 +121,12 @@ Page({
         success: function(res){
           res = res.data
           if (res.result < 0) {
-            console.log(res.message)
+            console.log(res)
+            wx.showToast({
+              title: '获取验证码失败，请稍后重试！',
+              image: '../../image/info.png',
+              duration: 3000
+            })
             return
           }
 
@@ -117,6 +137,14 @@ Page({
           wx.redirectTo({
             url: '../zhuye/zhuye',
             success: function(res){}
+          })
+        },
+        fail: function (res) {
+          console.log(res)
+          wx.showToast({
+            title: '获取验证码失败，请稍后重试！',
+            image: '../../image/info.png',
+            duration: 3000
           })
         }
      });

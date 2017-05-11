@@ -174,7 +174,12 @@ Page({
       success: function(res){
         res = res.data
         if (res.result <= 0) {
-          console.log(res.message)
+          wx.showToast({
+            title: '获取票务信息失败，请稍后再试！',
+            image: '../../image/info.png',
+            duration: 3000
+          })
+          console.log(res)
           return
         }
 
@@ -188,6 +193,15 @@ Page({
       },
       complete: function() {
         wx.hideLoading()
+      },
+      fail:function(res) {
+        wx.hideLoading()
+        wx.showToast({
+          title: '获取票务信息失败，请稍后再试！',
+          image: '../../image/info.png',
+          duration: 3000
+        })
+        console.log(res)
       }
     });
   },

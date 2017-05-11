@@ -58,6 +58,18 @@ App({
             console.log(that.globalData.pParks);
           }
         });
+
+        //获取号码缓存
+        that.globalData.phone = wx.getStorageSync(that.globalData.storage_Phone)
+        console.log(that.globalData.phone)
+        var phone = /^0?1[3|4|5|8][0-9]\d{8}$/;
+        if (phone.test(that.globalData.phone)) {
+          wx.redirectTo({
+            url: '../zhuye/zhuye',
+            success: function (res) { }
+          })
+        }  
+
       }
     });
   },

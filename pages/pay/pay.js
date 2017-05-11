@@ -38,6 +38,8 @@ Page({
         res = res.data
         if (res.result <= 0) {
           console.log("pay error:" + res.message)
+                  wx.hideLoading()
+
           return
         }
 
@@ -157,7 +159,12 @@ Page({
       success: function(res){
         res = res.data
         if (res.result <= 0) {
-          console.log(res.message)
+          wx.showToast({
+            title: '获取游乐场信息失败，请稍后再试！',
+            image: '../../image/info.png',
+            duration: 3000
+          })
+          console.log(res)
           return
         }
         var pack = JSON.parse(res.data)
@@ -167,6 +174,14 @@ Page({
         that.setData({
           packName:pack[0].name,          
         })
+      },
+      fail:function(res) {
+        wx.showToast({
+          title: '获取游乐场信息失败，请稍后再试！',
+          image: '../../image/info.png',
+          duration: 3000
+        })
+        console.log(res)        
       }
     });
   }
