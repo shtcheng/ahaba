@@ -74,6 +74,16 @@ Page({
   },
 
 
+  setColor: function (history) {
+    for (var i = 0; i < history.length; i++) {
+      if (i % 2 == 0) {
+        history[i].itembgcolor222 = "#5D9CEC"
+      } else {
+        history[i].itembgcolor222 = "#ff0000"
+      }
+    }
+  },
+
   //加载商品
   loadHistory: function () {
     var that = this
@@ -101,22 +111,15 @@ Page({
           return
         }
 
+
         var ticket = JSON.parse(res.data)
         that.data.history = ticket
+//        that.setColor(that.data.history)        
+        console.log("background color")
+        console.log(that.data.history)
         that.setData({
           history: that.data.history,
         });
-        console.log(that.data.history)
-
-
-
-        //        var ticket = JSON.parse(res.data)
-        //        that.data.tickets = ticket
-        //        that.setColor(that.data.tickets)
-        //        that.setData({
-        //          ticketList: that.data.tickets,
-        //        });
-        //        console.log(that.data.tickets)
       },
       complete: function () {
         wx.hideLoading()

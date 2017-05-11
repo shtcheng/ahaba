@@ -30,23 +30,20 @@
 
 
 
-<view style="background:#aaaaaa;display: flex; width=60%; height:65px;border-radius:4px;">
+<!--
+view style="background:#49d1ad;display: flex; width=60%; height:65px;border-radius:4px;">
 
 <image src="../../image/ticket.png" style="margin-top:10px;width:60px;height:40px"></image>
   <view style="display: cloumn; width=50%; height:85px">
     
-    <!--项目名称-->
     <view style="margin-top:8px;margin-left:10px;font-size:11pt;color:white">泸州游乐园：水上世界</view>
-    <!--时间-->
     <view style="margin-top:8px;margin-left:10px;font-size:9pt;color:gray">2017-04-04</view>
   </view>
-  <!--类别-->
   <view style="width:15%;margin-top:20px;margin-left:20px;font-size:11pt;color:white">成人票</view>
-  <!--价格-->
   <view style="width:15%;margin-top:20px;margin-left:15px;font-size:11pt;color:white">¥80.00</view>
 </view>
 
-
+-->
 
 
 
@@ -61,6 +58,7 @@
 
 <view style="margin-top:10px"/>
 <view style="background:#49d1ad;display: flex; width=60%; height:65px;border-radius:4px;">
+<!--view style="background:{{itembgcolor}};display: flex; width=60%; height:65px;border-radius:4px;"-->
 
 <image src="../../image/ticket.png" style="margin-top:10px;width:60px;height:40px"></image>
   <view style="display: cloumn; width=50%; height:85px">
