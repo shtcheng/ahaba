@@ -6,6 +6,7 @@ Page({
     logs: []
   },
   onLoad: function () {
+    this.loadChannelInfo();
   },
   
   //跳转到用户中心
@@ -57,4 +58,42 @@ Page({
       }
     })
   },  
+
+
+  //测试，获取通道最新售出票的信息
+  loadChannelInfo: function () {
+    var that = this;
+    var strUrl2 = app.globalData.rootUrl + '/getdata?query=ticket&parkcode=' + app.globalData.parkcode + '&itemcode=' + app.globalData.itemcode;
+    console.log("测试，获取通道最新售出票的信息");
+    console.log(strUrl2);
+    wx.request({
+      url: strUrl2,
+      data: {},
+      method: 'GET',
+      success: function (res) {
+        if (res.data.result <= 0) {
+          wx.showToast({
+            title: '获取通道最新售出票的信息失败，请稍后再试！',
+            image: '../../image/info.png',
+            duration: 3000
+          })
+          return;
+        }
+        console.log(res);
+      },
+
+      fail: function (res) {
+        if (res.data.result <= 0) {
+          wx.showToast({
+            title: '获取通道最新售出票的信息失败，请稍后再试！',
+            image: '../../image/info.png',
+            duration: 3000
+          })
+          return;
+        }
+      }
+    });
+  },
+
+
 })

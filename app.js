@@ -1,5 +1,32 @@
 //app.js
+
+
 App({
+
+  globalData:{
+    mustLogin: false,
+    appid: "wxb1e9f107aff08a66",
+    secret: "0ccd7143b59b99ae3fa50aecab312763",
+    rootUrl: "https://iland.cc",//服务器url
+    userInfo: null,//用户微信信息 
+    openid: "",
+    logincode: null,
+
+    storage_Phone: "phone",
+    storage_MyTicket: "myTicket",
+    storage_ParkCode: "parkcode",
+
+    parkcode: "0001",//游乐场编号
+    itemcode: "0001",//游乐项目编号
+    phone: "",//手机号
+    pAppId: "cpp.7f0ef3584bd58f14891ca3646378",//用户平台appid
+    pAppKey: "",//用户平台app key 
+    pUserInfo: null,//用户平台信息
+    pHasMoney: null,//用户账户余额
+    pParks: [],//游乐园列表
+  },
+
+
   onLaunch: function () {
     console.log("App onLaunch") 
     var that = this
@@ -8,7 +35,10 @@ App({
     wx.login({
       success: function(res){
         //用户信息
+        console.log("微信登陆：" + res);
+        console.log(res);
         that.globalData.logincode=res.code;
+        console.log("微信登陆,code：" + that.globalData.logincode);
         wx.getUserInfo({
           success: function (res) {
             that.globalData.userInfo = res.userInfo;
@@ -72,28 +102,5 @@ App({
 
       }
     });
-  },
-
-  globalData:{
-    mustLogin:false,
-    appid:"wxb1e9f107aff08a66",
-    secret:"0ccd7143b59b99ae3fa50aecab312763",
-    rootUrl:"https://iland.cc",//服务器url
-    userInfo:null,//用户微信信息 
-    openid:"",
-    logincode:null,
-
-    storage_Phone : "phone",
-    storage_MyTicket : "myTicket",
-    storage_ParkCode : "parkcode",
-
-    parkcode: "0001",//游乐场编号
-    itemcode:"0001",//游乐项目编号
-    phone:"",//手机号
-    pAppId:"cpp.7f0ef3584bd58f14891ca3646378",//用户平台appid
-    pAppKey:"",//用户平台app key 
-    pUserInfo:null,//用户平台信息
-    pHasMoney:null,//用户账户余额
-    pParks:[],//游乐园列表
   }
 })

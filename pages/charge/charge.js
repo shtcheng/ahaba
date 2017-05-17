@@ -1,10 +1,11 @@
 //user.js
 //获取应用实例
 var sha1 = require('../../utils/sha1.js')
+var md5 = require('../../utils/md5.js')
 
 var app = getApp();
 var tmp = 2;
-var tmp2 = 50;
+var tmp2 = 1;
 var chargeComplete = false;
 
 Page({
@@ -28,19 +29,6 @@ Page({
     this.setData({
       money:tmp * tmp2
     })
-
-//扫描二维码
-//    wx.scanCode({
-//      success: function(res) {
-//        console.log(res)
-//      },
-//      fail: function() {
-//        console.log(res)
-//      },
-//      complete: function(res) {
-//       console.log(res)
-//      }
-//    })
   },
   //充值按钮事件处理
   chargeAdd: function () {
@@ -57,28 +45,8 @@ Page({
   chargesubmit: function () {
 
     var that = this;
-    console.log("提交充值!");
-    chargeComplete = false;
-    
-
-    wx.checkSession({
-      success: function () {
-        //session 未过期，并且在本生命周期一直有效
-      },
-      fail: function () {
-        //登录态过期
-        wx.login({
-          success:function(res){
-            app.globalData.loginCode = res.code;
-          }
-        })
-      }
-    })
-
-
 
     that.getprepayinfo();
-
   },
 
   bindHideKeyboard: function (e) {
@@ -95,53 +63,106 @@ Page({
     var that = this
     wx.showLoading({
     })
-    var token = sha1.hex_sha1("recharge" + app.globalData.pAppKey + app.globalData.phone)
-    var strUrl = app.globalData.rootUrl + "/tradeinfo?cmd=recharge&token="+token+"&mobile=" + app.globalData.phone;
-    console.log("获取预下单信息")
-    console.log(strUrl)
 
-    wx.request({
-      url: strUrl,
-      data: { code: app.globalData.loginCode, amount: tmp*tmp2},
-      method: 'POST',
+
+
+
+
+    //重新登陆，更新loginCode
+    wx.login({
       success: function (res) {
-        wx.hideLoading()
+        console.log("提交充值,检查code是否过期,登录态过期!重新登陆成功！！！");
+        app.globalData.logincode = res.code;
 
-        console.log("获取预下单信息success")
-        res = res.data.data
-        console.log(res)
-        if (res.result <= 0) {
-          console.log(res.message)
 
-          wx.showToast({
-            title: '获取预下单信息失败，请稍后再试！',
-            image: '../../image/info.png',
-            duration: 3000
-          })
+        //获取预下单信息
+        var token = sha1.hex_sha1("recharge" + app.globalData.pAppKey + app.globalData.phone)
+        var strUrl = app.globalData.rootUrl + "/tradeinfo?cmd=recharge&token=" + token + "&mobile=" + app.globalData.phone;
+        console.log("获取预下单信息")
+        console.log(strUrl)
+        console.log("POST DATA:")
+        console.log("code:" + app.globalData.logincode + ",amount:" + tmp * tmp2)
 
-          return
-        }
+        wx.request({
+          url: strUrl,
+          data: { code: app.globalData.logincode, amount: tmp * tmp2 },
+          method: 'POST',
+          success: function (res) {
+            wx.hideLoading()
 
-        //        var ticket = JSON.parse(res.data)
-        //        that.data.tickets = ticket
-        //        that.setColor(that.data.tickets)
-        //        that.setData({
-        //          ticketList: that.data.tickets,
-        //        });
-        //        console.log(that.data.tickets)
-      },
-      complete: function () {
-        wx.hideLoading()
-        console.log("获取预下单信息 complete")
-      },
-      fail:function(res) {
-        wx.hideLoading()
-        console.log("获取预下单信息 fail")
-        
+            //获取预下单信息成功
+            console.log("获取预下单信息success")
+            console.log(res)
+            res = res.data.data
+            if (res.result <= 0) {
+              console.log(res.message)
+
+              wx.showToast({
+                title: '获取预下单信息失败，请稍后再试！',
+                image: '../../image/info.png',
+                duration: 3000
+              })
+              return
+            }
+
+            var d = JSON.parse(res);
+            app.globalData.pHasMoney = d.hasmoney;
+
+
+            var str = "appid=wx5f93f2b46a4fe6d8&device_info=1000&mch_id=" + d.mch_id + "&nonce_str=" + d.nonce_str +"&key=WWWilandcc20170415qazVFRwsx321PL";
+            var sign = (md5.hexMD5(str)).toUpperCase();
+            //调用支付
+            wx.requestPayment({
+              timeStamp: d.time_start,
+              nonceStr: d.nonce_str,
+              package: 'prepay_id=' + d.prepay_id,
+              signType: 'MD5',
+              paySign: sign,
+              success: function (res) {
+                if (res.result <= 0) {
+                  console.log("调用支付 success: " + res)
+
+                  wx.showToast({
+                    title: '支付成功！',
+                    image: '../../image/info.png',
+                    duration: 3000
+                  })
+
+                  return
+                }
+              },
+              fail: function (res) {
+                console.log("调用支付 fail: " + res)
+                wx.showToast({
+                  title: '支付失败，请稍后再试！',
+                  image: '../../image/info.png',
+                  duration: 3000
+                })
+              }
+            })
+          },
+          complete: function (res) {
+            wx.hideLoading()
+            console.log("获取预下单信息 complete" + res)
+          },
+          fail: function (res) {
+            wx.hideLoading()
+            console.log("获取预下单信息 fail" + res)
+
+          }
+        });
       }
-    });
+    })
+    
   },
-
+  //初始化
+  onLoad: function () {
+    var that = this
+    this.setData({
+      money: tmp * tmp2,
+      phonenumber: app.globalData.phone
+    })
+  }
 
 
 })
