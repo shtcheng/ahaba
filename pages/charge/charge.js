@@ -12,8 +12,8 @@ Page({
   data: {
     //motto: '你好，小程序！',
     currentMoney: '0.00',
-    money:100,
-    phonenumber:13982196214,
+    money: 100,
+    phonenumber: 13982196214,
     userInfo: {}
   },
 
@@ -22,12 +22,12 @@ Page({
   chargeMinus: function () {
     console.log("chargeMinus pressed");
     tmp--;
-    if(tmp < 1) {
+    if (tmp < 1) {
       tmp = 1;
     }
 
     this.setData({
-      money:tmp * tmp2
+      money: tmp * tmp2
     })
   },
   //充值按钮事件处理
@@ -37,7 +37,7 @@ Page({
     tmp++;
 
     this.setData({
-      money:tmp * tmp2
+      money: tmp * tmp2
     })
   },
 
@@ -109,19 +109,36 @@ Page({
             app.globalData.pHasMoney = d.hasmoney;
 
 
-            var str = "appid=wx5f93f2b46a4fe6d8&device_info=1000&mch_id=" + d.mch_id + "&nonce_str=" + d.nonce_str +"&key=WWWilandcc20170415qazVFRwsx321PL";
+            var ttt = Date.now().toString();
+            var nonce = d.nonce_str;
+            var pkg = "prepay_id="+d.prepay_id;
+            var str = "appid=wx5f93f2b46a4fe6d8"+"&nonceStr="+nonce+"&package="+pkg+"&signType=MD5&timeStamp="+ttt+"&key=WWWilandcc20170415qazVFRwsx321PL";
             var sign = (md5.hexMD5(str)).toUpperCase();
             //调用支付
-            wx.requestPayment({
-              timeStamp: d.time_start,
-              nonceStr: d.nonce_str,
-              package: 'prepay_id=' + d.prepay_id,
-              signType: 'MD5',
-              paySign: sign,
-              success: function (res) {
-                if (res.result <= 0) {
-                  console.log("调用支付 success: " + res)
 
+            console.log("调用支付")
+            console.log("调用支付")
+            console.log("调用支付")
+            console.log("调用支付, str:"+str)
+            console.log("调用支付, appid=wx5f93f2b46a4fe6d8")
+            console.log("调用支付, nonceStr="+nonce)
+            console.log("调用支付, pkg="+pkg)
+            console.log("调用支付, signType=MD5")
+            console.log("调用支付, timeStamp="+ttt)
+            console.log("调用支付, key=WWWilandcc20170415qazVFRwsx321PL")
+            console.log("调用支付, paySign="+sign)
+
+
+            wx.requestPayment({
+              timeStamp: ttt,
+              nonceStr: nonce,
+              package: pkg,
+              signType: "MD5",
+              paySign: sign,
+              success: function (errMsg) {
+                console.log("requestPayment success: " + errMsg)
+                if (res.result <= 0) 
+                {
                   wx.showToast({
                     title: '支付成功！',
                     image: '../../image/info.png',
@@ -131,13 +148,17 @@ Page({
                   return
                 }
               },
-              fail: function (res) {
-                console.log("调用支付 fail: " + res)
+              fail: function (errMsg){
+                console.log("requestPayment fail: " + errMsg)
                 wx.showToast({
                   title: '支付失败，请稍后再试！',
                   image: '../../image/info.png',
                   duration: 3000
                 })
+              },
+              complete: function (errMsg) {
+                console.log("requestPayment complete: " + errMsg.toString())
+
               }
             })
           },
@@ -147,13 +168,13 @@ Page({
           },
           fail: function (res) {
             wx.hideLoading()
-            console.log("获取预下单信息 fail" + res)
+            console.log("获取预下单信息 fail" + res.message)
 
           }
         });
       }
     })
-    
+
   },
   //初始化
   onLoad: function () {
