@@ -4,8 +4,8 @@ var sha1 = require('../../utils/sha1.js')
 var md5 = require('../../utils/md5.js')
 
 var app = getApp();
-var tmp = 2;
-var tmp2 = 1;
+var tmp = 1;
+var tmp2 = 0.01;
 var chargeComplete = false;
 
 Page({
@@ -71,7 +71,7 @@ Page({
     //重新登陆，更新loginCode
     wx.login({
       success: function (res) {
-        console.log("提交充值,检查code是否过期,登录态过期!重新登陆成功！！！");
+        console.log("提交充值,检查code是否过期,登录态过期!重新登陆成功！！！" + res.errMsg);
         app.globalData.logincode = res.code;
 
 
@@ -112,7 +112,7 @@ Page({
             var ttt = Date.now().toString();
             var nonce = d.nonce_str;
             var pkg = "prepay_id="+d.prepay_id;
-            var str = "appid=wx5f93f2b46a4fe6d8"+"&nonceStr="+nonce+"&package="+pkg+"&signType=MD5&timeStamp="+ttt+"&key=WWWilandcc20170415qazVFRwsx321PL";
+            var str = "appId=wx5f93f2b46a4fe6d8"+"&nonceStr="+nonce+"&package="+pkg+"&signType=MD5&timeStamp="+ttt+"&key=WWWilandcc20170415qazVFRwsx321PL";
             var sign = (md5.hexMD5(str)).toUpperCase();
             //调用支付
 
@@ -130,13 +130,13 @@ Page({
 
 
             wx.requestPayment({
-              timeStamp: ttt,
-              nonceStr: nonce,
-              package: pkg,
-              signType: "MD5",
-              paySign: sign,
-              success: function (errMsg) {
-                console.log("requestPayment success: " + errMsg)
+              timeStamp:ttt,
+              nonceStr:nonce,
+              package:pkg,
+              signType:"MD5",
+              paySign:sign,
+              success: function (res) {
+                console.log("requestPayment success: " + res.errMsg)
                 if (res.result <= 0) 
                 {
                   wx.showToast({
@@ -148,16 +148,16 @@ Page({
                   return
                 }
               },
-              fail: function (errMsg){
-                console.log("requestPayment fail: " + errMsg)
+              fail: function (res){
+                console.log("requestPayment fail: " + res.errMsg)
                 wx.showToast({
                   title: '支付失败，请稍后再试！',
                   image: '../../image/info.png',
                   duration: 3000
                 })
               },
-              complete: function (errMsg) {
-                console.log("requestPayment complete: " + errMsg.toString())
+              complete: function (res) {
+                console.log("requestPayment complete: " + res.errMsg)
 
               }
             })
@@ -169,12 +169,10 @@ Page({
           fail: function (res) {
             wx.hideLoading()
             console.log("获取预下单信息 fail" + res.message)
-
           }
         });
       }
     })
-
   },
   //初始化
   onLoad: function () {
