@@ -30,12 +30,13 @@ Page({
 
     wx.scanCode({
       success: (res) => {
-        console.log("扫描二维码 success")
-        console.log(res)
-        var prex = app.globalData.rootUrl;// +"/qrcode?";
-        var str = res.result.substring(0, prex.length);
-        if (str == app.globalData.rootUrl) {
-          str = res.result.substring()
+        var val = res.result;
+        var mark = app.globalData.rootUrl+"/qrcode?";
+        var prex = res.result.substring(0,mark.length);
+
+        if (prex == mark) {
+          var val2 = val.substring((mark.length), val.length)
+          this.parseData(val2)
           wx.navigateTo({
             url: '../index/index'
           })
@@ -58,6 +59,23 @@ Page({
       }
     })
   },  
+
+  parseData:function(val){
+    var vals = new Array();
+    vals = val.split("&");
+    for(var i = 0; i < vals.length; i++) {
+      var data = new Array();
+      data = vals[i].split("=")
+      var pr = data[0].toLowerCase();
+      if (pr=="parkcode") {
+        app.globalData.parkcode = data[1];
+      } else if(pr=="itemcode") {
+        app.globalData.itemcode = data[1];
+      }
+    }
+    console.log("parkcode: " + app.globalData.parkcode);
+    console.log("itemcode: " + app.globalData.itemcode);
+  },
 
 
   //测试，获取通道最新售出票的信息
@@ -94,6 +112,4 @@ Page({
       }
     });
   },
-
-
 })
