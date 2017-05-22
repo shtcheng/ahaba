@@ -46,7 +46,7 @@ Page({
         if (res.data.result <= 0) {
           wx.showToast({
             title: '获取用户信息失败，请稍后再试！',
-            image: '../../image/info.png',
+            image: '../../image/icon_error.png',
             duration: 3000
           })
           return;
@@ -64,7 +64,7 @@ Page({
         if (res.data.result <= 0) {
           wx.showToast({
             title: '获取账号信息失败，请稍后再试！',
-            image: '../../image/info.png',
+            image: '../../image/icon_error.png',
             duration: 3000
           })
           return;
@@ -104,7 +104,7 @@ Page({
 
           wx.showToast({
             title: '获取购票历史信息失败，请稍后再试！',
-            image: '../../image/info.png',
+            image: '../../image/icon_error.png',
             duration: 3000
           })
 
