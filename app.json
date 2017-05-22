@@ -1,6 +1,7 @@
 {
   "enableDebug": "true",
   "pages":[    
+    "pages/zhuye2/zhuye2",
     "pages/register/register",
     "pages/zhuye/zhuye",
     "pages/index/index",           
@@ -8,14 +9,37 @@
     "pages/charge/charge",
     "pages/user/user",
     "pages/proto/proto",
+    "pages/tickets/tickets",
+    "pages/cards/cards",
     "pages/logs/logs"
   ],
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#38404a",
-    "navigationBarTitleText": "云乐园",
+    "navigationBarTitleText": "乐园行",
     "navigationBarTextStyle":"white",
     "enableDebug":"true",
     "enablePullDownRefresh": "true"
-  }  
+  },
+  
+  "tabBar": {
+    "color": "#ffffff",
+    "selectedColor": "#48cfad",
+    "backgroundColor": "#525e6e",
+    "borderStyle": "#48cfad",
+    "list": [
+      {
+        "pagePath": "pages/zhuye2/zhuye2",
+        "text": "扫码购票",
+        "iconPath": "image/saoma1.png",
+        "selectedIconPath": "image/saoma1.png"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "text": "我的账号",
+        "iconPath": "image/user4.png",
+        "selectedIconPath": "image/user4.png"
+      }
+    ]
+  }
 }
