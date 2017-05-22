@@ -35,5 +35,7 @@
 
 <view style="height:50px;visibility:hidden"></view>
 <view style="width: 100%;margin:0 auto;bottom:80rpx;position:fixed; ">
+<label style="margin-left:10%;color:red">请与验票人员当面确认!</label>
+<view style="margin-top:10px"/>
  <button bindtap="pay" style="width: 90%;background:#5D9CEC;border:none;border-radius: 0;" >确定</button>
 </view>
