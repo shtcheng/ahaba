@@ -120,10 +120,29 @@ Page({
         
         var account = JSON.parse(res.data)
         if (account.hasmoney < that.data.totalPrice){
-          //转到充值
-          wx.navigateTo({
-            url: '../charge/charge',
-            success: function(res){}
+
+          wx.showModal({
+            title: '充值',
+            content: '余额不足，前往充值？',
+            success:function(res) {
+
+              if (res.confirm) {
+                console.log('用户点击确定')
+                //转到充值
+                wx.navigateTo({
+                  url: '../charge/charge',
+                  success: function (res) { }
+                })
+                return;
+              } else if (res.cancel) {
+                console.log('用户点击取消')
+              }
+            },
+            fail:function(res) {
+
+            },complete:function(res) {
+
+            }
           })
         }else{
           //支付
@@ -161,7 +180,7 @@ Page({
         if (res.result <= 0) {
           wx.showToast({
             title: '获取游乐场信息失败，请稍后再试！',
-            image: '../../image/info.png',
+            image: '../../image/icon_error.png',
             duration: 3000
           })
           console.log(res)
@@ -178,7 +197,7 @@ Page({
       fail:function(res) {
         wx.showToast({
           title: '获取游乐场信息失败，请稍后再试！',
-          image: '../../image/info.png',
+          image: '../../image/icon_error.png',
           duration: 3000
         })
         console.log(res)        
