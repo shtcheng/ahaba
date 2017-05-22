@@ -9,9 +9,9 @@
     </picker>
     -->
     <view class="index_view_user_time" style="color:#525D6F;">{{nowDate}}</view>
-    <view style="align:right">
+    <!--<view style="align:right">
       <image src="../../image/user2.png" class="index_view_user_user" bindtap="goToUserCenter"/>
-    </view>
+    </view>-->
   </view>
 
   <!--商品列表-->  

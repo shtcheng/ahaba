@@ -34,21 +34,21 @@ Page({
       nowDate: that.data.buyDate
     })
   },
-  //跳转到用户中心
-  goToUserCenter: function(){
-    if (app.globalData.phone.length == 0){
-      wx.navigateTo({
-        url: '../register/register',
-        success: function(res){}
-      })
-      return
-    }
+  // //跳转到用户中心
+  // goToUserCenter: function(){
+  //   if (app.globalData.phone.length == 0){
+  //     wx.navigateTo({
+  //       url: '../register/register',
+  //       success: function(res){}
+  //     })
+  //     return
+  //   }
 
-    wx.navigateTo({
-      url: '../user/user',
-      success: function(res){}
-    })
-  },
+  //   wx.navigateTo({
+  //     url: '../user/user',
+  //     success: function(res){}
+  //   })
+  // },
   //显示购买列表
   hiddenMyTick: function(){
     var that = this
@@ -176,7 +176,7 @@ Page({
         if (res.result <= 0) {
           wx.showToast({
             title: '获取票务信息失败，请稍后再试！',
-            image: '../../image/info.png',
+            image: '../../image/icon_error.png',
             duration: 3000
           })
           console.log(res)
@@ -184,7 +184,37 @@ Page({
         }
 
         var ticket = JSON.parse(res.data)
-        that.data.tickets = ticket
+
+        var tmpticket = new Array();
+
+        // 只加载在时间有效范围内的门票
+        var d = new Date();
+        for(var i = 0; i < ticket.length; i++) {
+          var t = ticket[i];
+          var start = new Array();
+          start = t.dt_open.split(":");
+          var t_start = new Date();
+          t_start.setHours(parseInt(start[0]), parseInt(start[1]), 0,0);
+
+          var close = new Array();
+          close  = t.dt_close.split(":");
+          var t_close = new Date();
+          t_close.setHours(parseInt(close[0]), parseInt(close[1]), 0, 0);
+          console.log("compare time: ")
+          console.log("current time: " + d.getTime())
+          console.log("open time: " + t_start.getTime())
+          console.log("close time: " + t_start.getTime())
+
+
+          if(d.getTime() > t_start.getTime() && d.getTime() <= t_close.getTime()) 
+          {
+            tmpticket.push(t);
+          }
+        }
+
+
+        that.data.tickets = tmpticket
+        // that.data.tickets = ticket
         that.setColor(that.data.tickets)        
         that.setData({
           ticketList : that.data.tickets,            
@@ -198,7 +228,7 @@ Page({
         wx.hideLoading()
         wx.showToast({
           title: '获取票务信息失败，请稍后再试！',
-          image: '../../image/info.png',
+          image: '../../image/icon_error.png',
           duration: 3000
         })
         console.log(res)

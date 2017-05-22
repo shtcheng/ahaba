@@ -13,7 +13,7 @@ Page({
     //motto: '你好，小程序！',
     currentMoney: '0.00',
     money: 100,
-    moneyvalue: 150,
+    moneyvalue: '',
     phonenumber: 13982196214,
     userInfo: {}
   },
@@ -21,12 +21,6 @@ Page({
 
   //充值按钮事件处理
   num50: function () {
-    console.log("num50 pressed");
-    // tmp--;
-    // if (tmp < 1) {
-    //   tmp = 1;
-    // }
-
     this.setData({
       moneyvalue: 50
     })
@@ -34,24 +28,12 @@ Page({
 
   //充值按钮事件处理
   num100: function () {
-    console.log("num50 pressed");
-    // tmp--;
-    // if (tmp < 1) {
-    //   tmp = 1;
-    // }
-
     this.setData({
       moneyvalue: 100
     })
   },
   //充值按钮事件处理
   num200: function () {
-    console.log("num50 pressed");
-    // tmp--;
-    // if (tmp < 1) {
-    //   tmp = 1;
-    // }
-
     this.setData({
       moneyvalue: 200
     })
@@ -59,35 +41,10 @@ Page({
 
   //充值按钮事件处理
   moneyinput: function (e) {
-    console.log("num50 pressed");
-
     this.setData({
       moneyvalue: e.detail.value
     })
   },
-  // //充值按钮事件处理
-  // chargeMinus: function () {
-  //   console.log("chargeMinus pressed");
-  //   tmp--;
-  //   if (tmp < 1) {
-  //     tmp = 1;
-  //   }
-
-  //   this.setData({
-  //     money: tmp * tmp2
-  //   })
-  // },
-  // //充值按钮事件处理
-  // chargeAdd: function () {
-  //   console.log("chargeAdd pressed");
-
-  //   tmp++;
-
-  //   this.setData({
-  //     money: tmp * tmp2
-  //   })
-  // },
-
   //提交充值按钮点击处理
   chargesubmit: function () {
 
@@ -147,7 +104,7 @@ Page({
 
               wx.showToast({
                 title: '获取预下单信息失败，请稍后再试！',
-                image: '../../image/info.png',
+                image: '../../image/icon_error.png',
                 duration: 3000
               })
               return
@@ -189,7 +146,7 @@ Page({
                 {
                   wx.showToast({
                     title: '支付成功！',
-                    image: '../../image/info.png',
+                    image: '../../image/icon_error.png',
                     duration: 3000
                   })
 
@@ -201,7 +158,7 @@ Page({
                 if ("requestPayment:fail cancel" != res.errMsg) {
                   wx.showToast({
                     title: '支付失败，请稍后再试！',
-                    image: '../../image/info.png',
+                    image: '../../image/icon_error.png',
                     duration: 3000
                   })
                 }
