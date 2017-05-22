@@ -1,8 +1,9 @@
 /**account.wxss**/
 .chargeinfo {
+  margin-left: 10%;
   display: flex;
   flex-direction: row;
- width:90%
+ width:80%
 }
 
 .motto50px {
@@ -20,4 +21,23 @@ motto10px {
 .charge_butt{  
   font-size:12pt;
   width:90%;
+}
+
+.register_code{
+  width: 80%;
+  display: flex;
+  margin-left: 10%;
+  background:#F0F0F0;
+}
+.register_code_lable{
+  margin:7px;
+  width:60%;
+  color:#525e6f;
+  font-size:12pt
+}
+.register_code_input{
+  margin:10px;
+  width: 57%;
+  color:#525e6f;
+  font-size:14pt
 }

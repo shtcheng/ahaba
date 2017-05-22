@@ -5,7 +5,7 @@ var md5 = require('../../utils/md5.js')
 
 var app = getApp();
 var tmp = 1;
-var tmp2 = 0.01;
+var tmp2 = 150;
 var chargeComplete = false;
 
 Page({
@@ -13,38 +13,86 @@ Page({
     //motto: '你好，小程序！',
     currentMoney: '0.00',
     money: 100,
+    moneyvalue: 150,
     phonenumber: 13982196214,
     userInfo: {}
   },
 
 
   //充值按钮事件处理
-  chargeMinus: function () {
-    console.log("chargeMinus pressed");
-    tmp--;
-    if (tmp < 1) {
-      tmp = 1;
-    }
+  num50: function () {
+    console.log("num50 pressed");
+    // tmp--;
+    // if (tmp < 1) {
+    //   tmp = 1;
+    // }
 
     this.setData({
-      money: tmp * tmp2
+      moneyvalue: 50
+    })
+  },
+
+  //充值按钮事件处理
+  num100: function () {
+    console.log("num50 pressed");
+    // tmp--;
+    // if (tmp < 1) {
+    //   tmp = 1;
+    // }
+
+    this.setData({
+      moneyvalue: 100
     })
   },
   //充值按钮事件处理
-  chargeAdd: function () {
-    console.log("chargeAdd pressed");
-
-    tmp++;
+  num200: function () {
+    console.log("num50 pressed");
+    // tmp--;
+    // if (tmp < 1) {
+    //   tmp = 1;
+    // }
 
     this.setData({
-      money: tmp * tmp2
+      moneyvalue: 200
     })
   },
+
+  //充值按钮事件处理
+  moneyinput: function (e) {
+    console.log("num50 pressed");
+
+    this.setData({
+      moneyvalue: e.detail.value
+    })
+  },
+  // //充值按钮事件处理
+  // chargeMinus: function () {
+  //   console.log("chargeMinus pressed");
+  //   tmp--;
+  //   if (tmp < 1) {
+  //     tmp = 1;
+  //   }
+
+  //   this.setData({
+  //     money: tmp * tmp2
+  //   })
+  // },
+  // //充值按钮事件处理
+  // chargeAdd: function () {
+  //   console.log("chargeAdd pressed");
+
+  //   tmp++;
+
+  //   this.setData({
+  //     money: tmp * tmp2
+  //   })
+  // },
 
   //提交充值按钮点击处理
   chargesubmit: function () {
 
     var that = this;
+    tmp2 = that.data.moneyvalue
 
     that.getprepayinfo();
   },
@@ -150,11 +198,13 @@ Page({
               },
               fail: function (res){
                 console.log("requestPayment fail: " + res.errMsg)
-                wx.showToast({
-                  title: '支付失败，请稍后再试！',
-                  image: '../../image/info.png',
-                  duration: 3000
-                })
+                if ("requestPayment:fail cancel" != res.errMsg) {
+                  wx.showToast({
+                    title: '支付失败，请稍后再试！',
+                    image: '../../image/info.png',
+                    duration: 3000
+                  })
+                }
               },
               complete: function (res) {
                 console.log("requestPayment complete: " + res.errMsg)

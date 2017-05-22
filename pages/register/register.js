@@ -134,9 +134,13 @@ Page({
           wx.setStorageSync(app.globalData.storage_Phone, app.globalData.phone)
           
           //返回首页
-          wx.redirectTo({
-            url: '../zhuye/zhuye',
-            success: function(res){}
+          // wx.redirectTo({
+          //   url: '../zhuye2/zhuye2',
+          //   success: function(res){}
+          // })
+
+          wx.navigateBack({
+            delta: 1
           })
         },
         fail: function (res) {
@@ -184,10 +188,14 @@ Page({
     console.log(app.globalData.phone)
     var phone = /^0?1[3|4|5|8][0-9]\d{8}$/;
     if (phone.test(app.globalData.phone)) {
-      wx.redirectTo({
-        url: '../zhuye/zhuye',
-        success: function (res) { }
+      wx.navigateBack({
+        delta: 1
       })
+      // wx.navigateBack()
+      // wx.redirectTo({
+      //   url: '../zhuye2/zhuye2',
+      //   success: function (res) { }
+      // })
     }  
   }
 })

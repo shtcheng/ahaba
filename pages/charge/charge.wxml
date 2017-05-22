@@ -15,18 +15,22 @@
 
     <view class="chargelabel" style="margin-left:5%;color:#525e6f">选择充值金额：</view>
     <view style="margin-top: 20px;"/>
-    <view class="chargeinfo">
-      <!--减号➖按钮-->
-      <view style=" margin-left:20%">
-      <image bindtap="chargeMinus" style="height:45px; width:45px;margin-top:0px"src="../../image/minus.png" />
-      </view>
-      <view style="background:#eff3f2;height:45px; width:50%;text-align:center;line-height:50px;color:#da5c5d;font-size:20pt">{{money}}</view>
-      <!--加号➕按钮-->
-      <view style=" margin-right:20%">
-      <image bindtap="chargeAdd" style="height:45px; width:45px;margin-top:0px"src="../../image/add.png"/>
-      </view>
+
+    <view style="margin-top: 20px;"/>
+    <view class="register_code">
+      <label class="register_code_lable">输入充值金额：</label>
+      <input bindinput="moneyinput"type="number" maxlength="6" confirm-type="done" class="register_code_input" value="{{moneyvalue}}"></input> 
     </view>
-    
+
+    <view style="margin-top: 20px;"/>
+    <view class="chargeinfo">
+      <image bindtap="num50" style="height:40px; width:90px;margin-top:0px"src="../../image/num50.png"/>
+      <view style="width:20px"></view>
+      <image bindtap="num100" style="height:40px; width:90px;margin-top:0px"src="../../image/num100.png"/>
+      <view style="width:20px"></view>
+      <image bindtap="num200" style="height:40px; width:90px;margin-top:0px"src="../../image/num200.png"/>    
+    </view>
+
     <view style="width: 100%;margin:0 auto;bottom:80rpx;position:fixed; ">
     <button class="charge_butt" style="background:#5d9cec;color:white" bindtap="chargesubmit">确定</button>
     </view>

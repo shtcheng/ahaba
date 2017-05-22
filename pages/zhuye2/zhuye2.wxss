@@ -72,3 +72,10 @@
     margin: 30px;
     margin-left:0px;
 }
+
+.qrcode_view_info{
+    display: flex;
+    width:100%;
+    align-items:center;
+    justify-content:center;
+}
