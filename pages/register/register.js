@@ -77,7 +77,7 @@ Page({
             console.log(res)                    
             wx.showToast({
               title: '获取验证码失败，请稍后重试！',
-              image: '../../image/info.png',
+              image: '../../image/icon_error.png',
               duration: 3000
             })
             return
@@ -91,7 +91,7 @@ Page({
           console.log(res)
           wx.showToast({
             title: '获取验证码失败，请稍后重试！',
-            image: '../../image/info.png',
+            image: '../../image/icon_error.png',
             duration: 3000
           })
         }
@@ -124,7 +124,7 @@ Page({
             console.log(res)
             wx.showToast({
               title: '获取验证码失败，请稍后重试！',
-              image: '../../image/info.png',
+              image: '../../image/icon_error.png',
               duration: 3000
             })
             return
@@ -147,7 +147,7 @@ Page({
           console.log(res)
           wx.showToast({
             title: '获取验证码失败，请稍后重试！',
-            image: '../../image/info.png',
+            image: '../../image/icon_error.png',
             duration: 3000
           })
         }
