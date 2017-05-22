@@ -1,0 +1,4 @@
+<!--tickets.wxml-->
+<view style="margin-top:50px; margin-left:20px">
+<text style="color:red">正在开发中，敬请期待……</text>
+</view>

@@ -1,0 +1,36 @@
+{
+  "navigationBarTitleText": "乐园行zhuye2",
+
+    "tabBar": {
+      "color": "#9b9794",
+      "selectedColor": "#Fdd63D",
+      "backgroundColor": "#fff",
+      "borderStyle": "#acacac",
+      "list": [
+        {
+          "pagePath": "pages/charge/charge",
+          "text": "扫码购票",
+          "iconPath": "images/shaoyishao.png",
+          "selectedIconPath": "images/shaoyishao.png"
+        },
+        {
+          "pagePath": "pages/charge/charge",
+          "text": "我的余额",
+          "iconPath": "images/shaoyishao.png",
+          "selectedIconPath": "images/shaoyishao.png"
+        },
+        {
+          "pagePath": "pages/charge/charge",
+          "text": "我的门票",
+          "iconPath": "images/menpiao.png",
+          "selectedIconPath": "images/menpiao.png"
+        },
+        {
+          "pagePath": "pages/charge/charge",
+          "text": "我的卡包",
+          "iconPath": "images/kabao.png",
+          "selectedIconPath": "images/kabao.png"
+        }
+      ]
+    }
+}
